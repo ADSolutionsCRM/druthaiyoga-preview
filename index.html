@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dru Thai Yoga — Website Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400;1,500&family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--tq:#00D6C6;--navy:#0F2E4E;--cream:#F7F5F1;--mist:#DBE7E7;--teal:#00756D;--slate:#4A6378;
+--wash:radial-gradient(ellipse 90% 80% at 50% 25%,#F2FFFD 0%,#BFF3EE 42%,#62DCD1 100%);
+--shadow:0 22px 50px -18px rgba(15,46,78,.28),0 6px 16px -8px rgba(15,46,78,.12)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--navy);font-family:'Source Sans 3',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+.ital{font-family:Lora,Georgia,serif;font-style:italic}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(32px,4.4vw,46px);line-height:1.12;margin:0}
+.spiral{position:absolute;pointer-events:none;z-index:1;fill:#fff;opacity:.38;height:auto;aspect-ratio:475/429;overflow:visible}
+.pill{display:inline-flex;align-items:center;gap:12px;padding:16px 30px;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.pill:hover{transform:translateY(-2px)}
+.pill.frost{background:rgba(255,255,255,.88);color:var(--navy);box-shadow:var(--shadow);backdrop-filter:blur(6px)}
+.pill.navy{background:var(--navy);color:#fff;box-shadow:0 14px 30px -12px rgba(15,46,78,.55)}
+.pill svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.wave{position:absolute;left:0;right:0;width:100%;height:110px;display:block;z-index:3}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(247,245,241,.86);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(15,46,78,.08)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:42px}
+.brand span{font-family:'Playfair Display',Georgia,serif;font-size:21px;letter-spacing:.08em}
+nav{display:flex;align-items:center;gap:26px;flex-wrap:wrap;font-weight:600;font-size:15px}
+nav a{text-decoration:none}
+nav a:not(.pill):hover{color:var(--teal)}
+nav .pill{padding:11px 22px;font-size:12px}
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--wash);padding:80px 0 0;text-align:center}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:260px;background:radial-gradient(ellipse 60% 100% at 50% 100%,rgba(84,170,120,.30),transparent 70%);z-index:1}
+.hero .logo{width:min(560px,86%);margin:0 auto;filter:drop-shadow(0 8px 18px rgba(255,255,255,.6))}
+.hero .tag{font-size:clamp(20px,2.4vw,26px);line-height:1.45;max-width:620px;margin:26px auto 0}
+.hero .rule{width:70px;height:2px;background:var(--navy);margin:26px auto;opacity:.7}
+.hero .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero .lotus{position:relative;z-index:4;width:min(560px,82%);margin:40px auto -70px;filter:drop-shadow(0 18px 24px rgba(15,46,78,.22))}
+.hero .wave{bottom:-1px}
+.badges{display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;margin-top:26px;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+/* treatments */
+.section{position:relative;padding:110px 0}
+.center{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:28px;margin-top:52px}
+.card{position:relative;overflow:hidden;background:#fff;border-radius:28px;padding:36px 32px 30px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.card .ic{width:104px;filter:drop-shadow(0 10px 14px rgba(0,150,140,.25));margin-bottom:6px}
+.card h3{margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:25px;line-height:1.2}
+.card p{margin:0;color:var(--slate)}
+.card .meta{margin-top:auto;padding-top:14px;border-top:1px solid var(--mist);display:flex;justify-content:space-between;font-weight:600}
+.card .spiral{width:180px;right:-40px;top:-40px;fill:var(--tq);opacity:.08}
+.also{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.also span{background:#fff;box-shadow:0 6px 16px -8px rgba(15,46,78,.2);padding:9px 18px;border-radius:999px;font-weight:600;font-size:15px}
+/* feature (flyer style) */
+.feature{position:relative;overflow:hidden;background:var(--wash);padding:120px 0}
+.fcard{display:flex;flex-wrap:wrap;background:#fff;border-radius:32px;overflow:hidden;box-shadow:var(--shadow)}
+.fhead{flex:1 1 100%;position:relative;background:linear-gradient(160deg,#7FE3DA,#2FD3C6);padding:44px 32px 80px;text-align:center;overflow:hidden}
+.fhead img{width:70px;margin:0 auto 10px}
+.fhead .t{font-family:'Playfair Display',Georgia,serif;font-size:30px;letter-spacing:.06em}
+.fhead .d{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-top:8px}
+.fhead .spiral{width:220px;right:-30px;top:-30px}
+.fphoto{flex:1 1 100%;position:relative;margin-top:-60px}
+.fphoto img{width:100%;height:clamp(240px,34vw,400px);object-fit:cover;object-position:60% 40%}
+.fphoto svg.w{position:absolute;left:0;right:0;width:100%;height:70px}
+.fbody{flex:1 1 100%;padding:10px 40px 44px;display:flex;flex-direction:column;gap:22px;align-items:center}
+.flist{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px 48px;width:100%;max-width:900px}
+.fitem{display:flex;gap:16px;align-items:flex-start}
+.fitem img{width:52px;flex-shrink:0}
+.fitem b{display:block;font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:23px;line-height:1.2}
+.fitem i{font-family:Lora,Georgia,serif;color:var(--slate)}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;background:#E3F7F5;border-radius:999px;padding:10px 22px;gap:6px 18px;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.tags span+span::before{content:"|";margin-right:18px;opacity:.5}
+.photonote{font-size:12.5px;color:var(--slate)}
+/* about */
+.about{display:flex;flex-wrap:wrap;gap:60px;align-items:center}
+.aphoto{flex:1 1 360px;min-width:0;position:relative}
+.aphoto .ph{aspect-ratio:4/5;border-radius:200px 200px 28px 28px;background:linear-gradient(170deg,#E3FBF8,#9BE9E1);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--slate);font-size:15px;padding:30px}
+.aphoto .lotus{position:absolute;width:62%;left:-8%;bottom:-40px;filter:drop-shadow(0 14px 18px rgba(15,46,78,.2))}
+.atext{flex:999 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;margin-top:48px}
+.step{background:rgba(255,255,255,.7);border-radius:24px;padding:30px;text-align:center;box-shadow:0 10px 30px -18px rgba(15,46,78,.3)}
+.step .n{font-family:'Playfair Display',Georgia,serif;font-size:44px;color:var(--teal);line-height:1}
+.step h3{margin:10px 0 6px;font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:22px}
+.step p{margin:0;color:var(--slate)}
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:28px;margin-top:52px}
+.rev{position:relative;overflow:hidden;border-radius:28px;padding:44px 34px 120px;min-height:380px;background:radial-gradient(ellipse 120% 90% at 30% 20%,#E9FCFA 0%,#A9EEE7 55%,#5ED9CE 100%);box-shadow:var(--shadow)}
+.rev .q{font-family:'Playfair Display',Georgia,serif;font-size:72px;line-height:.6;display:block;margin-bottom:10px}
+.rev blockquote{margin:0;font-family:Lora,Georgia,serif;font-style:italic;font-size:22px;line-height:1.45;position:relative;z-index:2}
+.rev figcaption{margin-top:20px;font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;position:relative;z-index:2}
+.rev .lotus{position:absolute;width:70%;right:-14%;bottom:-18px;z-index:1;filter:drop-shadow(0 10px 14px rgba(15,46,78,.18))}
+.rev .spiral{width:170px;right:-30px;top:-30px}
+/* instagram */
+.hls{display:flex;flex-wrap:wrap;justify-content:center;gap:26px;margin-top:40px}
+.hl{display:flex;flex-direction:column;align-items:center;gap:10px;width:112px;text-decoration:none}
+.hl img{width:104px;filter:drop-shadow(0 12px 16px rgba(0,150,140,.28));transition:transform .2s}
+.hl:hover img{transform:translateY(-4px)}
+.hl span{font-family:Lora,Georgia,serif;font-style:italic;font-size:15.5px;text-align:center;line-height:1.2}
+.profile{width:170px;margin:0 auto;filter:drop-shadow(0 18px 24px rgba(15,46,78,.25))}
+/* booking */
+.book{position:relative;overflow:hidden;background:var(--wash);padding:120px 0 130px}
+.bgrid{display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.binfo{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.binfo .contact{display:flex;flex-direction:column;gap:6px;font-weight:600}
+form{flex:999 1 460px;min-width:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:30px;padding:38px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
+input,select,textarea{font:inherit;font-weight:400;padding:13px 15px;border:1px solid #A9C2C8;border-radius:14px;background:#fff;color:var(--navy)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--tq);outline-offset:1px}
+.full{grid-column:1/-1}
+form button{font:inherit;cursor:pointer;border:0;justify-content:center}
+.formnote{grid-column:1/-1;font-size:14px;color:var(--teal);min-height:1em;margin:0}
+.book .lotus{position:absolute;z-index:1;width:min(420px,48%);left:-60px;bottom:-30px;filter:drop-shadow(0 16px 22px rgba(15,46,78,.22))}
+footer{background:#fff;padding:40px 0}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+footer .fb{display:flex;align-items:center;gap:16px}
+footer .fb img{width:70px}
+.small{font-size:14px;color:var(--slate)}
+.preview-note{background:var(--navy);color:#C9F4F0;text-align:center;font-size:13px;padding:8px 16px;letter-spacing:.04em}
+@media (max-width:640px){nav a:not(.pill){display:none}.section{padding:80px 0}.fbody{padding:10px 22px 34px}.hero{padding-top:56px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="sp" viewBox="481 122 475 429"><path fill-rule="evenodd" d="M668.50,138.38Q664.25,140.50 658.12,144.38Q652.00,148.25 649.25,150.38Q646.50,152.50 640.75,158.38Q635.00,164.25 632.12,167.88Q629.25,171.50 626.25,176.38Q623.25,181.25 621.25,185.38Q619.25,189.50 617.50,193.88Q615.75,198.25 614.25,204.38Q612.75,210.50 612.12,216.25Q611.50,222.00 611.50,228.12Q611.50,234.25 611.88,237.62Q612.25,241.00 613.25,245.88Q614.25,250.75 615.12,253.62Q616.00,256.50 618.38,262.00Q620.75,267.50 624.00,273.00Q627.25,278.50 630.88,283.12Q634.50,287.75 641.62,294.12Q648.75,300.50 653.12,303.25Q657.50,306.00 662.00,308.12Q666.50,310.25 672.00,312.25Q677.50,314.25 681.00,315.00Q684.50,315.75 691.25,316.62Q698.00,317.50 704.25,317.38Q710.50,317.25 715.12,316.62Q719.75,316.00 724.88,314.75Q730.00,313.50 733.38,312.25Q736.75,311.00 742.62,307.88Q748.50,304.75 753.25,301.12Q758.00,297.50 763.00,292.62Q768.00,287.75 772.00,281.88Q776.00,276.00 777.75,272.50Q779.50,269.00 781.62,263.00Q783.75,257.00 784.88,250.38Q786.00,243.75 786.00,238.62Q786.00,233.50 785.62,230.00Q785.25,226.50 784.75,224.00Q784.25,221.50 782.75,216.88Q781.25,212.25 778.88,207.62Q776.50,203.00 774.50,200.00Q772.50,197.00 771.12,195.38Q769.75,193.75 765.12,189.38Q760.50,185.00 757.12,182.75Q753.75,180.50 750.12,178.75Q746.50,177.00 742.38,175.50Q738.25,174.00 733.38,173.00Q728.50,172.00 720.75,171.88Q713.00,171.75 705.75,173.12Q698.50,174.50 692.88,176.88Q687.25,179.25 682.38,182.62Q677.50,186.00 672.88,190.88Q668.25,195.75 666.25,198.88Q664.25,202.00 662.50,205.75Q660.75,209.50 659.50,214.50Q658.25,219.50 658.00,222.12Q657.75,224.75 657.88,228.88Q658.00,233.00 659.00,238.25Q660.00,243.50 661.00,246.25Q662.00,249.00 663.25,251.38Q664.50,253.75 667.38,257.62Q670.25,261.50 672.25,263.38Q674.25,265.25 676.50,266.88Q678.75,268.50 683.12,270.62Q687.50,272.75 692.38,274.00Q697.25,275.25 702.38,275.25Q707.50,275.25 710.50,274.75Q713.50,274.25 716.75,273.25Q720.00,272.25 724.62,269.25Q729.25,266.25 731.38,264.12Q733.50,262.00 735.62,259.38Q737.75,256.75 738.88,254.38Q740.00,252.00 741.00,248.00Q742.00,244.00 742.12,240.12Q742.25,236.25 741.38,232.62Q740.50,229.00 738.75,225.62Q737.00,222.25 735.25,220.50Q733.50,218.75 731.25,217.25Q729.00,215.75 725.62,214.62Q722.25,213.50 719.00,213.38Q715.75,213.25 713.88,213.50Q712.00,213.75 710.50,214.25Q709.00,214.75 706.62,216.12Q704.25,217.50 702.75,219.25Q701.25,221.00 700.25,223.88Q699.25,226.75 699.38,228.88Q699.50,231.00 700.38,232.75Q701.25,234.50 702.75,235.50Q704.25,236.50 706.12,236.62Q708.00,236.75 708.88,236.38Q709.75,236.00 711.88,234.12Q714.00,232.25 715.75,232.25Q717.50,232.25 718.38,232.75Q719.25,233.25 720.00,234.12Q720.75,235.00 721.38,237.38Q722.00,239.75 721.50,241.88Q721.00,244.00 720.12,245.62Q719.25,247.25 716.88,249.50Q714.50,251.75 710.62,253.38Q706.75,255.00 703.50,255.12Q700.25,255.25 697.38,254.50Q694.50,253.75 692.00,252.38Q689.50,251.00 687.88,249.62Q686.25,248.25 684.25,245.62Q682.25,243.00 681.00,240.12Q679.75,237.25 679.12,234.38Q678.50,231.50 678.50,228.88Q678.50,226.25 679.25,222.12Q680.00,218.00 681.00,215.38Q682.00,212.75 684.38,209.38Q686.75,206.00 691.00,202.00Q695.25,198.00 699.00,196.25Q702.75,194.50 707.62,193.38Q712.50,192.25 717.00,192.12Q721.50,192.00 726.50,192.75Q731.50,193.50 736.25,195.38Q741.00,197.25 745.25,200.12Q749.50,203.00 751.50,205.00Q753.50,207.00 755.50,209.88Q757.50,212.75 759.00,215.62Q760.50,218.50 761.62,221.75Q762.75,225.00 763.62,230.38Q764.50,235.75 764.12,241.50Q763.75,247.25 762.88,250.88Q762.00,254.50 760.75,257.62Q759.50,260.75 756.50,266.25Q753.50,271.75 748.62,276.88Q743.75,282.00 740.88,284.38Q738.00,286.75 734.12,288.88Q730.25,291.00 724.50,293.12Q718.75,295.25 713.00,296.12Q707.25,297.00 703.50,297.12Q699.75,297.25 697.00,297.00Q694.25,296.75 689.00,295.75Q683.75,294.75 680.75,293.75Q677.75,292.75 672.12,290.00Q666.50,287.25 662.75,284.62Q659.00,282.00 656.62,279.88Q654.25,277.75 651.12,274.38Q648.00,271.00 646.00,268.00Q644.00,265.00 642.00,261.12Q640.00,257.25 638.50,253.25Q637.00,249.25 635.88,244.50Q634.75,239.75 634.38,236.12Q634.00,232.50 634.12,226.38Q634.25,220.25 634.88,216.00Q635.50,211.75 636.88,207.00Q638.25,202.25 639.12,200.00Q640.00,197.75 643.38,191.50Q646.75,185.25 649.88,181.25Q653.00,177.25 657.38,172.88Q661.75,168.50 664.88,166.12Q668.00,163.75 672.12,161.38Q676.25,159.00 681.25,156.75Q686.25,154.50 689.88,153.38Q693.50,152.25 698.12,151.25Q702.75,150.25 707.88,149.62Q713.00,149.00 717.75,149.00Q722.50,149.00 728.88,149.62Q735.25,150.25 741.25,151.88Q747.25,153.50 750.62,154.75Q754.00,156.00 758.75,158.38Q763.50,160.75 767.25,163.12Q771.00,165.50 776.75,170.75Q782.50,176.00 785.00,178.75Q787.50,181.50 791.88,188.25Q796.25,195.00 799.12,201.12Q802.00,207.25 803.75,213.38Q805.50,219.50 806.62,227.62Q807.75,235.75 807.62,242.12Q807.50,248.50 806.75,254.12Q806.00,259.75 804.75,264.88Q803.50,270.00 801.38,275.50Q799.25,281.00 796.62,285.88Q794.00,290.75 790.12,296.12Q786.25,301.50 780.88,307.12Q775.50,312.75 772.75,315.12Q770.00,317.50 766.50,319.88Q763.00,322.25 756.00,325.75Q749.00,329.25 743.75,331.25Q738.50,333.25 735.25,334.00Q732.00,334.75 724.00,335.88Q716.00,337.00 707.75,336.88Q699.50,336.75 694.25,336.00Q689.00,335.25 685.12,334.38Q681.25,333.50 673.50,331.00Q665.75,328.50 657.50,324.75Q649.25,321.00 643.75,319.00Q638.25,317.00 631.38,315.25Q624.50,313.50 616.00,312.50Q607.50,311.50 598.88,311.75Q590.25,312.00 580.25,314.00Q570.25,316.00 566.12,317.38Q562.00,318.75 556.75,321.00Q551.50,323.25 547.88,325.12Q544.25,327.00 539.50,330.00Q534.75,333.00 529.00,337.62Q523.25,342.25 519.88,345.62Q516.50,349.00 512.50,353.88Q508.50,358.75 504.38,365.12Q500.25,371.50 497.25,377.75Q494.25,384.00 492.38,389.25Q490.50,394.50 488.62,402.50Q486.75,410.50 486.12,416.38Q485.50,422.25 485.50,426.88Q485.50,431.50 486.00,436.62Q486.50,441.75 487.12,445.50Q487.75,449.25 490.00,457.12Q492.25,465.00 496.38,473.88Q500.50,482.75 504.00,487.88Q507.50,493.00 512.75,499.12Q518.00,505.25 521.00,508.12Q524.00,511.00 529.75,515.38Q535.50,519.75 541.00,523.00Q546.50,526.25 550.88,528.25Q555.25,530.25 562.88,532.62Q570.50,535.00 576.50,536.00Q582.50,537.00 586.88,537.38Q591.25,537.75 595.62,537.75Q600.00,537.75 604.12,537.38Q608.25,537.00 615.88,535.50Q623.50,534.00 628.75,532.12Q634.00,530.25 639.75,527.50Q645.50,524.75 650.88,521.25Q656.25,517.75 659.50,515.00Q662.75,512.25 668.25,506.38Q673.75,500.50 677.00,496.00Q680.25,491.50 683.00,486.25Q685.75,481.00 687.62,476.00Q689.50,471.00 690.50,467.12Q691.50,463.25 692.50,456.25Q693.50,449.25 693.50,442.25Q693.50,435.25 692.88,430.50Q692.25,425.75 691.00,420.50Q689.75,415.25 688.62,411.88Q687.50,408.50 684.00,401.88Q680.50,395.25 677.88,391.50Q675.25,387.75 671.25,383.38Q667.25,379.00 664.12,376.25Q661.00,373.50 656.62,370.62Q652.25,367.75 648.38,365.75Q644.50,363.75 639.12,361.75Q633.75,359.75 629.50,358.75Q625.25,357.75 620.00,357.12Q614.75,356.50 610.38,356.50Q606.00,356.50 600.88,357.00Q595.75,357.50 591.50,358.50Q587.25,359.50 581.38,361.75Q575.50,364.00 571.25,366.38Q567.00,368.75 562.38,372.12Q557.75,375.50 553.12,380.38Q548.50,385.25 546.12,388.62Q543.75,392.00 541.62,396.12Q539.50,400.25 538.25,403.62Q537.00,407.00 535.88,411.62Q534.75,416.25 534.38,419.62Q534.00,423.00 534.00,428.38Q534.00,433.75 535.38,440.88Q536.75,448.00 538.25,451.88Q539.75,455.75 541.75,459.38Q543.75,463.00 546.00,466.25Q548.25,469.50 551.12,472.50Q554.00,475.50 559.25,479.50Q564.50,483.50 570.50,486.12Q576.50,488.75 583.00,490.12Q589.50,491.50 595.62,491.50Q601.75,491.50 604.12,491.25Q606.50,491.00 613.12,488.88Q619.75,486.75 622.50,485.38Q625.25,484.00 627.50,482.50Q629.75,481.00 633.25,477.62Q636.75,474.25 639.25,470.75Q641.75,467.25 642.75,465.25Q643.75,463.25 645.75,457.12Q647.75,451.00 648.00,445.12Q648.25,439.25 647.50,435.00Q646.75,430.75 644.50,425.25Q642.25,419.75 639.62,416.25Q637.00,412.75 634.50,410.50Q632.00,408.25 627.88,405.88Q623.75,403.50 620.75,402.62Q617.75,401.75 613.50,401.38Q609.25,401.00 604.62,401.75Q600.00,402.50 596.62,404.00Q593.25,405.50 591.75,406.50Q590.25,407.50 588.38,409.38Q586.50,411.25 584.75,413.62Q583.00,416.00 581.88,418.75Q580.75,421.50 580.38,423.38Q580.00,425.25 580.12,429.38Q580.25,433.50 580.75,435.38Q581.25,437.25 582.25,439.25Q583.25,441.25 584.75,442.88Q586.25,444.50 587.62,445.25Q589.00,446.00 590.25,446.38Q591.50,446.75 593.62,446.75Q595.75,446.75 597.50,446.12Q599.25,445.50 600.25,444.62Q601.25,443.75 602.12,441.88Q603.00,440.00 603.00,438.38Q603.00,436.75 602.00,434.38Q601.00,432.00 600.88,430.38Q600.75,428.75 601.50,427.12Q602.25,425.50 603.25,424.62Q604.25,423.75 605.38,423.25Q606.50,422.75 608.75,422.50Q611.00,422.25 612.50,422.50Q614.00,422.75 615.38,423.38Q616.75,424.00 618.00,425.00Q619.25,426.00 620.62,427.62Q622.00,429.25 623.38,432.12Q624.75,435.00 625.25,437.38Q625.75,439.75 625.62,444.00Q625.50,448.25 625.00,450.00Q624.50,451.75 622.62,455.00Q620.75,458.25 618.75,460.38Q616.75,462.50 613.62,464.62Q610.50,466.75 607.25,468.00Q604.00,469.25 602.00,469.62Q600.00,470.00 595.62,470.00Q591.25,470.00 587.25,469.12Q583.25,468.25 578.38,465.62Q573.50,463.00 569.88,459.75Q566.25,456.50 564.25,453.75Q562.25,451.00 560.38,446.62Q558.50,442.25 557.50,437.00Q556.50,431.75 556.38,428.88Q556.25,426.00 556.50,423.75Q556.75,421.50 558.50,415.00Q560.25,408.50 563.75,402.75Q567.25,397.00 571.62,392.75Q576.00,388.50 578.50,386.75Q581.00,385.00 584.25,383.25Q587.50,381.50 590.50,380.38Q593.50,379.25 596.50,378.50Q599.50,377.75 603.25,377.38Q607.00,377.00 610.88,377.00Q614.75,377.00 620.25,378.12Q625.75,379.25 632.75,382.12Q639.75,385.00 644.12,388.12Q648.50,391.25 651.88,394.50Q655.25,397.75 659.00,403.00Q662.75,408.25 664.12,411.00Q665.50,413.75 667.38,419.00Q669.25,424.25 670.38,431.50Q671.50,438.75 671.50,442.12Q671.50,445.50 671.00,449.88Q670.50,454.25 669.62,458.12Q668.75,462.00 667.38,465.88Q666.00,469.75 663.50,474.75Q661.00,479.75 659.25,482.50Q657.50,485.25 655.88,487.25Q654.25,489.25 648.38,494.75Q642.50,500.25 638.00,503.12Q633.50,506.00 629.38,508.00Q625.25,510.00 621.25,511.25Q617.25,512.50 611.38,513.75Q605.50,515.00 595.88,515.00Q586.25,515.00 582.00,514.25Q577.75,513.50 572.00,511.88Q566.25,510.25 560.00,507.25Q553.75,504.25 551.00,502.50Q548.25,500.75 543.00,496.50Q537.75,492.25 535.50,490.00Q533.25,487.75 529.25,482.62Q525.25,477.50 522.62,473.38Q520.00,469.25 518.50,466.38Q517.00,463.50 515.75,460.00Q514.50,456.50 513.25,452.00Q512.00,447.50 511.00,441.75Q510.00,436.00 509.88,430.88Q509.75,425.75 510.50,418.38Q511.25,411.00 512.38,405.88Q513.50,400.75 515.12,396.12Q516.75,391.50 520.50,384.38Q524.25,377.25 528.38,371.75Q532.50,366.25 535.88,362.75Q539.25,359.25 544.75,354.88Q550.25,350.50 554.88,347.75Q559.50,345.00 564.50,342.75Q569.50,340.50 576.25,338.50Q583.00,336.50 589.12,335.38Q595.25,334.25 602.62,334.00Q610.00,333.75 615.38,334.25Q620.75,334.75 625.38,335.62Q630.00,336.50 638.38,338.88Q646.75,341.25 652.12,343.75Q657.50,346.25 666.50,352.25Q675.50,358.25 680.12,362.50Q684.75,366.75 688.50,371.12Q692.25,375.50 697.38,383.25Q702.50,391.00 704.38,394.88Q706.25,398.75 707.75,403.00Q709.25,407.25 711.38,416.38Q713.50,425.50 714.12,433.62Q714.75,441.75 715.75,447.88Q716.75,454.00 718.75,461.00Q720.75,468.00 723.38,474.25Q726.00,480.50 729.50,486.25Q733.00,492.00 736.25,496.50Q739.50,501.00 745.62,507.50Q751.75,514.00 757.38,518.62Q763.00,523.25 769.00,527.25Q775.00,531.25 785.12,535.62Q795.25,540.00 802.62,542.00Q810.00,544.00 818.50,545.12Q827.00,546.25 835.00,546.12Q843.00,546.00 851.12,544.88Q859.25,543.75 868.12,541.12Q877.00,538.50 885.50,534.50Q894.00,530.50 897.88,528.00Q901.75,525.50 907.75,521.00Q913.75,516.50 916.88,513.50Q920.00,510.50 925.00,504.75Q930.00,499.00 932.62,495.00Q935.25,491.00 938.75,484.62Q942.25,478.25 945.12,470.38Q948.00,462.50 949.12,457.38Q950.25,452.25 951.00,447.12Q951.75,442.00 951.75,433.62Q951.75,425.25 951.50,422.62Q951.25,420.00 950.00,413.38Q948.75,406.75 946.25,399.25Q943.75,391.75 940.50,385.62Q937.25,379.50 934.38,375.12Q931.50,370.75 927.50,366.00Q923.50,361.25 915.88,354.88Q908.25,348.50 902.00,344.88Q895.75,341.25 889.62,338.88Q883.50,336.50 878.88,335.12Q874.25,333.75 869.25,332.88Q864.25,332.00 857.75,331.62Q851.25,331.25 847.38,331.38Q843.50,331.50 838.12,332.25Q832.75,333.00 827.75,334.25Q822.75,335.50 815.50,338.12Q808.25,340.75 801.62,344.50Q795.00,348.25 789.50,352.62Q784.00,357.00 778.88,362.38Q773.75,367.75 770.25,372.62Q766.75,377.50 765.00,380.62Q763.25,383.75 760.75,389.25Q758.25,394.75 756.62,400.62Q755.00,406.50 754.50,409.62Q754.00,412.75 753.75,416.38Q753.50,420.00 753.75,426.12Q754.00,432.25 754.62,436.75Q755.25,441.25 756.62,446.25Q758.00,451.25 761.00,457.50Q764.00,463.75 765.25,465.75Q766.50,467.75 770.50,472.88Q774.50,478.00 777.88,481.12Q781.25,484.25 788.50,488.88Q795.75,493.50 800.62,495.75Q805.50,498.00 809.12,499.12Q812.75,500.25 820.50,501.38Q828.25,502.50 834.25,502.38Q840.25,502.25 845.12,501.62Q850.00,501.00 856.75,498.88Q863.50,496.75 868.12,494.25Q872.75,491.75 877.38,488.50Q882.00,485.25 885.50,481.50Q889.00,477.75 893.12,472.00Q897.25,466.25 899.00,462.38Q900.75,458.50 902.25,454.00Q903.75,449.50 904.38,446.38Q905.00,443.25 905.12,435.12Q905.25,427.00 904.00,421.00Q902.75,415.00 900.38,409.00Q898.00,403.00 894.88,398.62Q891.75,394.25 888.88,391.38Q886.00,388.50 883.00,386.12Q880.00,383.75 876.25,381.75Q872.50,379.75 869.88,378.75Q867.25,377.75 864.38,377.00Q861.50,376.25 857.88,375.75Q854.25,375.25 847.88,375.38Q841.50,375.50 836.00,376.88Q830.50,378.25 826.62,380.00Q822.75,381.75 817.50,385.75Q812.25,389.75 810.38,391.75Q808.50,393.75 807.00,395.88Q805.50,398.00 803.12,403.12Q800.75,408.25 799.88,412.50Q799.00,416.75 799.00,421.38Q799.00,426.00 799.25,427.62Q799.50,429.25 800.88,433.50Q802.25,437.75 803.75,440.62Q805.25,443.50 808.25,447.00Q811.25,450.50 813.38,452.00Q815.50,453.50 819.62,455.38Q823.75,457.25 827.12,457.88Q830.50,458.50 834.25,458.38Q838.00,458.25 842.25,457.12Q846.50,456.00 848.62,454.75Q850.75,453.50 852.38,452.00Q854.00,450.50 855.75,448.12Q857.50,445.75 858.25,444.12Q859.00,442.50 859.50,440.00Q860.00,437.50 860.00,434.50Q860.00,431.50 859.62,429.75Q859.25,428.00 858.62,426.62Q858.00,425.25 856.62,423.62Q855.25,422.00 853.62,421.12Q852.00,420.25 849.62,420.00Q847.25,419.75 845.88,420.12Q844.50,420.50 842.88,421.38Q841.25,422.25 840.25,423.62Q839.25,425.00 839.00,426.75Q838.75,428.50 839.25,429.88Q839.75,431.25 839.75,432.62Q839.75,434.00 839.38,434.75Q839.00,435.50 837.38,436.62Q835.75,437.75 833.12,437.75Q830.50,437.75 828.50,436.75Q826.50,435.75 825.25,434.50Q824.00,433.25 822.62,431.00Q821.25,428.75 820.75,426.75Q820.25,424.75 820.25,421.88Q820.25,419.00 820.62,417.00Q821.00,415.00 821.88,412.75Q822.75,410.50 824.38,408.25Q826.00,406.00 828.25,404.00Q830.50,402.00 833.88,400.12Q837.25,398.25 840.88,397.38Q844.50,396.50 847.00,396.38Q849.50,396.25 853.50,396.75Q857.50,397.25 860.25,398.12Q863.00,399.00 865.12,400.25Q867.25,401.50 869.25,403.12Q871.25,404.75 873.62,407.25Q876.00,409.75 878.38,414.12Q880.75,418.50 882.00,423.25Q883.25,428.00 883.38,432.62Q883.50,437.25 882.38,443.00Q881.25,448.75 879.50,452.62Q877.75,456.50 875.38,460.00Q873.00,463.50 870.38,466.25Q867.75,469.00 865.50,470.75Q863.25,472.50 858.25,475.25Q853.25,478.00 850.38,478.88Q847.50,479.75 843.88,480.38Q840.25,481.00 834.62,481.12Q829.00,481.25 826.75,481.00Q824.50,480.75 819.88,479.62Q815.25,478.50 810.12,476.38Q805.00,474.25 800.00,470.88Q795.00,467.50 792.50,465.00Q790.00,462.50 788.00,460.00Q786.00,457.50 783.75,453.88Q781.50,450.25 780.50,448.00Q779.50,445.75 778.38,441.88Q777.25,438.00 776.50,433.50Q775.75,429.00 775.75,424.12Q775.75,419.25 776.12,415.75Q776.50,412.25 777.00,409.62Q777.50,407.00 779.12,402.12Q780.75,397.25 782.12,394.38Q783.50,391.50 786.25,387.25Q789.00,383.00 790.88,380.62Q792.75,378.25 795.88,375.25Q799.00,372.25 803.12,369.00Q807.25,365.75 809.88,364.12Q812.50,362.50 817.38,360.12Q822.25,357.75 825.75,356.75Q829.25,355.75 837.12,354.50Q845.00,353.25 849.25,353.25Q853.50,353.25 858.00,353.75Q862.50,354.25 867.88,355.38Q873.25,356.50 877.25,357.88Q881.25,359.25 887.62,362.88Q894.00,366.50 899.50,370.88Q905.00,375.25 908.88,379.62Q912.75,384.00 913.75,385.50Q914.75,387.00 918.25,393.38Q921.75,399.75 923.62,404.50Q925.50,409.25 926.62,413.75Q927.75,418.25 928.50,424.12Q929.25,430.00 929.25,434.38Q929.25,438.75 928.62,444.38Q928.00,450.00 926.38,456.12Q924.75,462.25 921.75,468.88Q918.75,475.50 916.25,479.75Q913.75,484.00 909.88,488.75Q906.00,493.50 901.62,497.62Q897.25,501.75 889.88,506.88Q882.50,512.00 877.88,514.25Q873.25,516.50 869.00,518.00Q864.75,519.50 858.00,521.00Q851.25,522.50 845.12,523.12Q839.00,523.75 832.38,523.62Q825.75,523.50 818.25,522.25Q810.75,521.00 802.88,518.38Q795.00,515.75 791.00,513.88Q787.00,512.00 782.50,509.50Q778.00,507.00 772.75,503.00Q767.50,499.00 763.12,494.75Q758.75,490.50 754.88,485.50Q751.00,480.50 747.25,474.38Q743.50,468.25 740.88,461.75Q738.25,455.25 736.62,449.12Q735.00,443.00 734.12,436.25Q733.25,429.50 733.25,422.38Q733.25,415.25 733.88,410.50Q734.50,405.75 736.12,399.12Q737.75,392.50 740.25,386.00Q742.75,379.50 744.75,375.62Q746.75,371.75 750.75,365.75Q754.75,359.75 756.75,357.25Q758.75,354.75 763.75,349.88Q768.75,345.00 777.25,338.50Q785.75,332.00 792.38,325.88Q799.00,319.75 802.25,316.00Q805.50,312.25 808.38,308.38Q811.25,304.50 815.75,296.62Q820.25,288.75 823.62,279.88Q827.00,271.00 828.00,266.62Q829.00,262.25 829.75,256.88Q830.50,251.50 830.62,241.75Q830.75,232.00 829.88,225.50Q829.00,219.00 828.25,215.62Q827.50,212.25 825.38,205.50Q823.25,198.75 819.75,191.00Q816.25,183.25 810.00,174.12Q803.75,165.00 798.50,159.62Q793.25,154.25 788.88,150.62Q784.50,147.00 777.38,142.75Q770.25,138.50 766.50,136.75Q762.75,135.00 758.12,133.38Q753.50,131.75 747.38,130.25Q741.25,128.75 735.75,128.00Q730.25,127.25 723.12,127.00Q716.00,126.75 708.50,127.50Q701.00,128.25 694.38,129.62Q687.75,131.00 680.25,133.62Q672.75,136.25 668.50,138.38ZM728.88,356.38Q736.00,355.50 736.25,355.75Q736.50,356.00 736.25,356.62Q736.00,357.25 734.00,359.75Q732.00,362.25 729.50,366.12Q727.00,370.00 724.38,375.88Q721.75,381.75 721.12,382.62Q720.50,383.50 719.88,383.12Q719.25,382.75 717.50,379.25Q715.75,375.75 712.88,371.25Q710.00,366.75 706.50,362.38Q703.00,358.00 703.25,357.38Q703.50,356.75 712.62,357.00Q721.75,357.25 728.88,356.38Z"/></symbol></defs></svg>
+<div class="preview-note">Website preview: placeholders in [brackets] are waiting for Dru's own details</div>
+<header>
+<div class="wrap">
+<a class="brand" href="#top"><img src="img/symbol.png" alt=""><span>DRU THAI YOGA</span></a>
+<nav aria-label="Main">
+<a href="#treatments">Treatments</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a>
+<a class="pill navy" href="#book">Book a session</a>
+</nav>
+</div>
+</header>
+
+<section class="hero" id="top">
+<svg class="spiral" style="width:420px;left:-120px;top:-60px" aria-hidden="true"><use href="#sp"/></svg>
+<svg class="spiral" style="width:300px;right:-80px;top:220px;opacity:.28" aria-hidden="true"><use href="#sp"/></svg>
+<div class="wrap">
+<img class="logo" src="img/logo.png" alt="Dru Thai Yoga, Mobile Traditional Thai Massage and 1:1 Yoga in Farnham">
+<p class="tag ital">Relax, release tension and restore balance with personalised holistic therapy, in the comfort of your own home.</p>
+<div class="rule"></div>
+<div class="ctas">
+<a class="pill frost" href="#book">Book a session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="pill navy" href="#treatments">View treatments</a>
+</div>
+<div class="badges"><span>Mobile · I come to you</span><span>Bespoke treatments</span><span>Farnham, Surrey</span></div>
+<img class="lotus" src="img/lotus.png" alt="">
+</div>
+<svg class="wave" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,58 C320,120 620,0 980,46 C1180,72 1320,70 1440,40 L1440,110 L0,110Z" fill="#F7F5F1"/></svg>
+</section>
+
+<section class="section" id="treatments">
+<div class="wrap">
+<div class="center"><div class="eyebrow">Treatments</div><h2>Care shaped around you</h2><p class="ital" style="margin:0;font-size:20px;color:var(--slate)">Every session is tailored to how you feel on the day.</p></div>
+<div class="cards">
+<article class="card"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><img class="ic" src="img/massage.png" alt=""><h3>Traditional Thai Yoga Massage</h3><p>Deeply therapeutic, restorative bodywork with assisted stretching and rhythmic pressure, in your own home.</p><div class="meta"><span>[Duration]</span><span>[Price]</span></div></article>
+<article class="card"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><img class="ic" src="img/yoga.png" alt=""><h3>Private 1:1 Yoga</h3><p>Personalised, supportive guidance for strength, mobility and wellbeing, at your own pace.</p><div class="meta"><span>[Duration]</span><span>[Price]</span></div></article>
+<article class="card"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><img class="ic" src="img/hearts.png" alt=""><h3>Pregnancy Massage</h3><p>Gentle, nurturing bodywork adapted to each stage of pregnancy.</p><div class="meta"><span>[Duration]</span><span>[Price]</span></div></article>
+</div>
+<div class="also"><span>Indian Head Massage</span><span>Thai Foot &amp; Leg Massage</span><span>Therapeutic Bodywork</span><span>Mindfulness &amp; Wellbeing</span></div>
+</div>
+</section>
+
+<section class="feature">
+<svg class="spiral" style="width:360px;left:-100px;bottom:-80px;opacity:.3" aria-hidden="true"><use href="#sp"/></svg>
+<div class="wrap">
+<div class="fcard">
+<div class="fhead">
+<svg class="spiral" aria-hidden="true"><use href="#sp"/></svg>
+<img src="img/symbol.png" alt="">
+<div class="t">DRU THAI YOGA</div>
+<div class="d">Mobile Traditional Thai Massage &amp; 1:1 Yoga in Farnham</div>
+</div>
+<div class="fphoto">
+<svg class="w" style="top:-1px" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 L1000,0 L1000,18 C760,70 300,-10 0,52Z" fill="#3ED5C9"/></svg>
+<img src="img/photo.jpg" alt="Dru giving a Thai yoga massage stretch">
+<svg class="w" style="bottom:-1px" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C260,0 640,70 1000,24 L1000,70 L0,70Z" fill="#fff"/></svg>
+</div>
+<div class="fbody">
+<div class="flist">
+<div class="fitem"><img src="img/lotus-icon.png" alt=""><div><b>Traditional Thai Massage</b><i>Deeply therapeutic, restorative bodywork</i></div></div>
+<div class="fitem"><img src="img/lotus-icon.png" alt=""><div><b>1:1 Yoga</b><i>Personalised, supportive guidance for strength, mobility and wellbeing</i></div></div>
+</div>
+<div class="tags"><span>Mobile</span><span>Bespoke treatments</span><span>Female clients only</span></div>
+<a class="pill navy" href="#book">Book your session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<div class="photonote">Photo taken from the current flyer at low resolution. Swap in the original image file.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="wrap about">
+<div class="aphoto"><div class="ph">Photo of Dru<br>(her own portrait or session photo)</div><img class="lotus" src="img/lotus.png" alt=""></div>
+<div class="atext">
+<div class="eyebrow">Meet Dru</div>
+<h2>Personal care, from one practitioner</h2>
+<p class="ital" style="margin:0;font-size:22px;line-height:1.5">[A sentence in Dru's own words about why she does this work.]</p>
+<p style="margin:0;color:var(--slate)">[Her background, training and experience, written by Dru. Qualifications to be added exactly as she holds them.]</p>
+<div class="steps" style="margin-top:20px">
+<div class="step"><div class="n">01</div><h3>Enquire</h3><p>Tell Dru what you need and when suits you.</p></div>
+<div class="step"><div class="n">02</div><h3>Tailor</h3><p>Your session is shaped around you.</p></div>
+<div class="step"><div class="n">03</div><h3>Relax</h3><p>Dru comes to you. No travel, no rush.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="reviews" style="padding-top:40px">
+<div class="wrap">
+<div class="center"><img src="img/lotus-icon.png" alt="" style="width:92px;filter:drop-shadow(0 10px 14px rgba(0,150,140,.25))"><div class="eyebrow">Client reviews</div><h2>Kind words</h2></div>
+<div class="reviews">
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>[Real client review, used with permission]</blockquote><figcaption>[Client first name] · Client review</figcaption><img class="lotus" src="img/lotus.png" alt=""></figure>
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>[Real client review, used with permission]</blockquote><figcaption>[Client first name] · Client review</figcaption><img class="lotus" src="img/lotus.png" alt=""></figure>
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>[Real client review, used with permission]</blockquote><figcaption>[Client first name] · Client review</figcaption><img class="lotus" src="img/lotus.png" alt=""></figure>
+</div>
+</div>
+</section>
+
+<section class="section" style="padding-top:20px">
+<div class="wrap center">
+<img class="profile" src="img/profile.png" alt="Dru Thai Yoga Instagram profile picture">
+<div class="eyebrow" style="margin-top:10px">Follow along</div>
+<a href="https://www.instagram.com/druthaiyoga/" class="serif" style="font-size:34px;text-decoration:none">@druthaiyoga</a>
+<div class="hls">
+<a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/lotus-icon.png" alt=""><span>Reviews</span></a>
+<a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/yoga.png" alt=""><span>Yoga</span></a>
+<a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/massage.png" alt=""><span>Thai Massage</span></a>
+<a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/hearts.png" alt=""><span>Mother's Day</span></a>
+<a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/heart.png" alt=""><span>Charity</span></a>
+<a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/megaphone.png" alt=""><span>Events &amp; News</span></a>
+</div>
+</div>
+</section>
+
+<section class="book" id="book">
+<svg class="wave" style="top:-1px;transform:scaleY(-1)" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,58 C320,120 620,0 980,46 C1180,72 1320,70 1440,40 L1440,110 L0,110Z" fill="#F7F5F1"/></svg>
+<svg class="spiral" style="width:380px;right:-90px;top:60px" aria-hidden="true"><use href="#sp"/></svg>
+<img class="lotus" src="img/lotus.png" alt="">
+<div class="wrap bgrid">
+<div class="binfo">
+<div class="eyebrow">Book a session</div>
+<h2>Ready to feel lighter?</h2>
+<p class="ital" style="margin:0;font-size:20px">Send an enquiry and Dru will be in touch to arrange a time that suits you.</p>
+<div class="contact"><span>[Phone number]</span><span>[Email address]</span><span>@druthaiyoga</span><span>Farnham, Surrey</span></div>
+</div>
+<form id="enq">
+<label>Name<input type="text" name="name" autocomplete="name"></label>
+<label>Phone or email<input type="text" name="contact"></label>
+<label>Treatment<select name="treatment"><option>Thai Yoga Massage</option><option>1:1 Yoga</option><option>Pregnancy Massage</option><option>Indian Head Massage</option><option>Thai Foot &amp; Leg Massage</option><option>Not sure yet</option></select></label>
+<label>Preferred days / times<input type="text" name="when"></label>
+<label class="full">Message<textarea name="msg" rows="4"></textarea></label>
+<button class="pill navy full" type="submit">Send enquiry</button>
+<p class="formnote" id="fnote" role="status"></p>
+</form>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<div class="fb"><img src="img/profile.png" alt=""><div><div class="serif" style="font-size:20px;letter-spacing:.06em">DRU THAI YOGA</div><div class="small">Mobile Traditional Thai Massage &amp; 1:1 Yoga in Farnham</div></div></div>
+<div class="small">© Dru Thai Yoga · <a href="https://www.instagram.com/druthaiyoga/">Instagram</a></div>
+</div>
+</footer>
+<script>
+document.getElementById('enq').addEventListener('submit',function(e){e.preventDefault();document.getElementById('fnote').textContent='This is a preview, so the form is not connected yet and nothing was sent.';});
+</script>
+</body>
+</html>

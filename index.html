@@ -267,6 +267,17 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
  .aphoto .lotus{width:46%}
 }
 
+
+/* ===== floating monogram ===== */
+#mono{position:fixed;left:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(20px) scale(.8);transition:opacity .5s,visibility .5s,transform .5s cubic-bezier(.2,.7,.2,1);text-decoration:none}
+#mono.show{opacity:1;visibility:visible;transform:none}
+#mono .fl{display:flex;animation:floaty 5s ease-in-out infinite}
+#mono svg{width:40px;height:auto;aspect-ratio:475/429;fill:var(--navy);will-change:transform}
+#mono .tip{position:absolute;left:74px;white-space:nowrap;background:var(--navy);color:#fff;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;opacity:0;transform:translateX(-6px);transition:.3s;pointer-events:none}
+#mono:hover .tip,#mono:focus-visible .tip{opacity:1;transform:none}
+#mono::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(0,214,198,.5);animation:ring 5s ease-in-out infinite}
+.brand img{will-change:transform}
+@media (max-width:700px){#mono{width:54px;height:54px;left:14px;bottom:14px}#mono svg{width:34px}#mono .tip{display:none}}
 /* ===== intro & sound ===== */
 #intro{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;background:#0F2E4E url(img/quoteband.webp) center/cover;transition:opacity 1.2s ease,visibility 1.2s,transform 1.4s cubic-bezier(.2,.7,.2,1)}
 #intro::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(15,46,78,.35),rgba(15,46,78,.82) 75%),linear-gradient(180deg,rgba(0,214,198,.18),rgba(15,46,78,.4))}
@@ -316,6 +327,7 @@ html.intro-open .hcopy>*,html.intro-open .hphoto,html.intro-open .hphoto .frame 
 <div class="hp">Soft ocean &amp; kalimba ambience · best with headphones</div>
 </div>
 </div>
+<a id="mono" href="#top" aria-label="Back to top"><span class="fl"><svg aria-hidden="true"><use href="#sp"/></svg></span><span class="tip">Back to top</span></a>
 <button id="snd" type="button" aria-label="Turn relaxing sound on" aria-pressed="false"><span></span><span></span><span></span><span></span></button>
 <div class="preview-note">Preview of the refreshed Dru Thai Yoga website</div>
 <header>
@@ -613,6 +625,26 @@ document.getElementById('fnote').textContent='Your email app should open with th
   document.addEventListener('keydown',function k(e){if(e.key==='Escape'&&html.classList.contains('intro-open')){enter(false);document.removeEventListener('keydown',k)}});
   setTimeout(function(){document.getElementById('enterSound').focus({preventScroll:true})},300);
  }
+})();
+</script>
+
+<script>
+(function(){
+ var m=document.getElementById('mono'),s=m.querySelector('svg'),logo=document.querySelector('.brand img');
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var lastY=window.scrollY,rot=0,vel=0,raf=null;
+ function loop(){
+  vel*=0.92; rot+=vel;
+  if(!reduce){s.style.transform='rotate('+rot.toFixed(2)+'deg)';if(logo)logo.style.transform='rotate('+(rot*0.5).toFixed(2)+'deg)'}
+  if(Math.abs(vel)>0.02){raf=requestAnimationFrame(loop)}else{raf=null}
+ }
+ window.addEventListener('scroll',function(){
+  var y=window.scrollY,d=y-lastY;lastY=y;
+  m.classList.toggle('show',y>400);
+  vel+=d*0.06; vel=Math.max(-18,Math.min(18,vel));
+  if(!raf)raf=requestAnimationFrame(loop);
+ },{passive:true});
+ m.addEventListener('click',function(e){e.preventDefault();vel-=24;if(!raf)raf=requestAnimationFrame(loop);window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
 })();
 </script>
 </body>

@@ -227,7 +227,10 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
 @media (max-width:700px){
  body{font-size:16px}
  .brand img{width:34px}.brand span{font-size:16px;letter-spacing:.06em}
- nav .pill{padding:10px 16px;font-size:11px;letter-spacing:.1em}
+ nav .pill{padding:10px 14px;font-size:11px;letter-spacing:.08em}
+ nav{gap:10px}
+ #snd{width:40px;height:40px}
+ .brand span{font-size:15px}
  .preview-note{font-size:12px;padding:6px 12px}
  .hero{padding:44px 0 120px}
  .hgrid{gap:28px}
@@ -269,15 +272,15 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
 
 
 /* ===== floating monogram ===== */
-#mono{position:fixed;left:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(20px) scale(.8);transition:opacity .5s,visibility .5s,transform .5s cubic-bezier(.2,.7,.2,1);text-decoration:none}
+#mono{position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(20px) scale(.8);transition:opacity .5s,visibility .5s,transform .5s cubic-bezier(.2,.7,.2,1);text-decoration:none}
 #mono.show{opacity:1;visibility:visible;transform:none}
 #mono .fl{display:flex;animation:floaty 5s ease-in-out infinite}
 #mono svg{width:40px;height:auto;aspect-ratio:475/429;fill:var(--navy);will-change:transform}
-#mono .tip{position:absolute;left:74px;white-space:nowrap;background:var(--navy);color:#fff;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;opacity:0;transform:translateX(-6px);transition:.3s;pointer-events:none}
+#mono .tip{position:absolute;right:74px;white-space:nowrap;background:var(--navy);color:#fff;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;opacity:0;transform:translateX(6px);transition:.3s;pointer-events:none}
 #mono:hover .tip,#mono:focus-visible .tip{opacity:1;transform:none}
 #mono::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(0,214,198,.5);animation:ring 5s ease-in-out infinite}
 .brand img{will-change:transform}
-@media (max-width:700px){#mono{width:54px;height:54px;left:14px;bottom:14px}#mono svg{width:34px}#mono .tip{display:none}}
+@media (max-width:700px){#mono{width:54px;height:54px;right:14px;bottom:14px}#mono svg{width:34px}#mono .tip{display:none}}
 /* ===== intro & sound ===== */
 #intro{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;background:#0F2E4E url(img/quoteband.webp) center/cover;transition:opacity 1.2s ease,visibility 1.2s,transform 1.4s cubic-bezier(.2,.7,.2,1)}
 #intro::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(15,46,78,.35),rgba(15,46,78,.82) 75%),linear-gradient(180deg,rgba(0,214,198,.18),rgba(15,46,78,.4))}
@@ -297,13 +300,15 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
 @keyframes ring{0%,100%{transform:scale(.7);opacity:.2}50%{transform:scale(1.15);opacity:.9}}
 html.intro-open,html.intro-open body{overflow:hidden}
 html.intro-open .hcopy>*,html.intro-open .hphoto,html.intro-open .hphoto .frame img{animation-play-state:paused}
-#snd{position:fixed;right:18px;bottom:18px;z-index:60;width:54px;height:54px;border-radius:50%;border:0;cursor:pointer;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow);display:none;align-items:center;justify-content:center;gap:3px;color:var(--navy)}
-#snd.show{display:flex}
+#snd{position:relative;flex-shrink:0;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(15,46,78,.25);cursor:pointer;background:#fff;box-shadow:0 4px 12px -6px rgba(15,46,78,.3);display:flex;transition:border-color .3s,background .3s;align-items:center;justify-content:center;gap:3px;color:var(--navy)}
+#snd:hover{border-color:var(--tq)}
+#snd.on{background:#E3F7F5;border-color:var(--tq)}
 #snd span{display:block;width:3px;height:6px;border-radius:2px;background:currentColor;transition:height .3s}
 #snd.on span{animation:eq 1.2s ease-in-out infinite}
 #snd.on span:nth-child(2){animation-delay:-.4s}#snd.on span:nth-child(3){animation-delay:-.8s}#snd.on span:nth-child(4){animation-delay:-.2s}
-#snd:not(.on)::after{content:"";position:absolute;width:30px;height:2px;background:currentColor;transform:rotate(-45deg);border-radius:2px}
-@keyframes eq{0%,100%{height:6px}50%{height:20px}}
+#snd:not(.on)::after{content:"";position:absolute;width:24px;height:2px;background:currentColor;transform:rotate(-45deg);border-radius:2px}
+@keyframes eq{0%,100%{height:5px}50%{height:16px}}
+nav{gap:18px}
 @media (prefers-reduced-motion:reduce){#intro .bsym,#intro .ring{animation:none!important}}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation:none!important;transition:none!important}
@@ -328,13 +333,13 @@ html.intro-open .hcopy>*,html.intro-open .hphoto,html.intro-open .hphoto .frame 
 </div>
 </div>
 <a id="mono" href="#top" aria-label="Back to top"><span class="fl"><svg aria-hidden="true"><use href="#sp"/></svg></span><span class="tip">Back to top</span></a>
-<button id="snd" type="button" aria-label="Turn relaxing sound on" aria-pressed="false"><span></span><span></span><span></span><span></span></button>
 <div class="preview-note">Preview of the refreshed Dru Thai Yoga website</div>
 <header>
 <div class="wrap">
 <a class="brand" href="#top"><img decoding="async" src="img/symbol.webp" alt=""><span>DRU THAI YOGA</span></a>
 <nav aria-label="Main">
 <a href="#treatments">Treatments</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a>
+<button id="snd" type="button" aria-label="Turn relaxing sound on" aria-pressed="false" title="Relaxing sound"><span></span><span></span><span></span><span></span></button>
 <a class="pill navy" href="#book">Book a session</a>
 </nav>
 </div>

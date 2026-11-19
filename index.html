@@ -307,6 +307,21 @@ footer{padding:64px 0 28px;background:#fff;border-top:1px solid var(--mist)}
 .powered{letter-spacing:.04em}.powered a{font-weight:600;color:var(--navy);letter-spacing:.06em;text-decoration:none;border-bottom:1px solid var(--tq);padding:10px 0 1px;transition:color .2s}.powered a:hover{color:var(--teal)}
 @media (max-width:900px){.fgrid{grid-template-columns:1fr 1fr}.fbrand{grid-column:1/-1}}
 @media (max-width:520px){.fgrid{grid-template-columns:1fr;gap:26px}footer{padding:48px 0 90px}}
+
+/* ===== booking panel ===== */
+.bpanel{flex:999 1 520px;min-width:0;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-radius:30px;box-shadow:var(--shadow);overflow:hidden;position:relative;z-index:2}
+.btabs{display:flex;gap:6px;padding:10px;background:#E3F7F5}
+.btabs button{flex:1;font:inherit;font-weight:600;font-size:14px;letter-spacing:.06em;padding:13px 14px;border:0;border-radius:18px;background:transparent;color:var(--slate);cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.btabs button[aria-selected=true]{background:#fff;color:var(--navy);box-shadow:0 6px 16px -10px rgba(15,46,78,.4)}
+.bpane{padding:0}
+.calbox{min-height:620px;width:100%;overflow:auto}
+.calbox:empty{display:none}
+.calsoon{padding:48px 34px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.calsoon h3{margin:6px 0 0;font-size:28px}
+.calsoon p{margin:0;max-width:420px;color:var(--slate)}
+.bsym2{width:70px;height:auto;aspect-ratio:475/429;fill:var(--tq);animation:breathe 8s ease-in-out infinite}
+.bpanel form{flex:none;background:none;backdrop-filter:none;box-shadow:none;border-radius:0;padding:30px 34px 34px}
+@media (max-width:700px){.btabs button{font-size:12.5px;padding:12px 8px}.bpanel form{padding:22px 20px 26px}.calbox{min-height:560px}}
 /* ===== blooming lotus ===== */
 .bloom{display:block;aspect-ratio:611/310;height:auto}
 .bloom .bl-in{position:relative;width:100%;height:100%;transform-origin:50% 95%;transform:scale(calc(.55 + var(--p,1)*.45));opacity:calc(.25 + var(--p,1)*.75)}
@@ -541,11 +556,26 @@ nav{gap:18px}
 <div class="binfo">
 <div class="eyebrow">Book a session</div>
 <h2>Ready to feel lighter?</h2>
-<p class="ital" style="margin:0;font-size:20px">Get in touch for a friendly chat and begin your restorative journey.</p>
+<p class="ital" style="margin:0;font-size:20px">Pick a time that suits you and book instantly, or ask Dru a question first.</p>
 <div class="contact tap"><a href="tel:+447359185626" style="text-decoration:none">07359 185626</a><a href="mailto:druthaiyoga@gmail.com" style="text-decoration:none">druthaiyoga@gmail.com</a><a href="https://www.instagram.com/druthaiyoga/" style="text-decoration:none">@druthaiyoga</a></div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="eyebrow">Schedule</div><span>Monday &amp; Tuesday · 09:30–14:30</span><span>Thursday &amp; Friday · 09:30–14:30</span><span class="ital">Additional hours upon request</span></div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="eyebrow">Location</div><span>Farnham GU10, Surrey</span></div>
 </div>
+<div class="bpanel">
+<div class="btabs" role="tablist" aria-label="Booking options">
+<button type="button" role="tab" id="tab-cal" aria-selected="true" aria-controls="pane-cal">Check availability &amp; book</button>
+<button type="button" role="tab" id="tab-ask" aria-selected="false" aria-controls="pane-ask">Ask a question</button>
+</div>
+<div id="pane-cal" role="tabpanel" aria-labelledby="tab-cal" class="bpane">
+<div id="cal-inline" class="calbox"></div>
+<div id="cal-soon" class="calsoon" hidden>
+<svg class="bsym2" aria-hidden="true"><use href="#sp"/></svg>
+<h3 class="serif">Online booking opens soon</h3>
+<p>Live availability is being set up. Until then, send a quick enquiry and Dru will confirm a time with you.</p>
+<button type="button" class="pill navy" id="goAsk">Send an enquiry</button>
+</div>
+</div>
+<div id="pane-ask" role="tabpanel" aria-labelledby="tab-ask" class="bpane" hidden>
 <form id="enq">
 <label>Name<input type="text" name="name" autocomplete="name" required></label>
 <label>Phone or email<input type="text" name="contact" autocomplete="email" required></label>
@@ -555,6 +585,8 @@ nav{gap:18px}
 <button class="pill navy full" type="submit">Send enquiry by email</button>
 <p class="formnote" id="fnote" role="status"></p>
 </form>
+</div>
+</div>
 </div>
 </section>
 
@@ -740,6 +772,27 @@ document.getElementById('fnote').textContent='Your email app should open with th
  window.addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(f)}},{passive:true});f();
  var form=document.getElementById('enq');
  form.addEventListener('submit',function(e){if(!form.checkValidity()){e.preventDefault();e.stopImmediatePropagation();form.reportValidity();document.getElementById('fnote').textContent='Please add your name and a phone number or email.'}},true);
+})();
+</script>
+
+<script>
+/* ============ ONLINE BOOKING (Cal.com) ============
+   Set CAL_LINK to Dru's Cal.com username, e.g. "druthaiyoga"
+   (shows both 1 hour and 90 minute sessions), or a single
+   event, e.g. "druthaiyoga/thai-yoga-massage".
+   For testing without editing: add ?cal=yourname to the URL. */
+var CAL_LINK = "";
+(function(){
+ var q=new URLSearchParams(location.search).get('cal');if(q)CAL_LINK=q.replace(/[^a-zA-Z0-9_\-\/]/g,'');
+ var tc=document.getElementById('tab-cal'),ta=document.getElementById('tab-ask'),pc=document.getElementById('pane-cal'),pa=document.getElementById('pane-ask');
+ function show(which){var cal=which==='cal';tc.setAttribute('aria-selected',cal);ta.setAttribute('aria-selected',!cal);pc.hidden=!cal;pa.hidden=cal}
+ tc.addEventListener('click',function(){show('cal')});ta.addEventListener('click',function(){show('ask')});
+ document.getElementById('goAsk').addEventListener('click',function(){show('ask');var i=pa.querySelector('input');if(i)i.focus()});
+ if(!CAL_LINK){document.getElementById('cal-soon').hidden=false;return}
+ (function (C, A, L) { var p = function (a, ar) { a.q.push(ar); }; var d = C.document; C.Cal = C.Cal || function () { var cal = C.Cal; var ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { var api = function () { p(api, arguments); }; var namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+ Cal("init","dru",{origin:"https://app.cal.com"});
+ Cal.ns.dru("inline",{elementOrSelector:"#cal-inline",calLink:CAL_LINK,config:{layout:"month_view",theme:"light","ui.autoscroll":"false"}});
+ Cal.ns.dru("ui",{theme:"light",cssVarsPerTheme:{light:{"cal-brand":"#0F2E4E","cal-brand-emphasis":"#00756D","cal-brand-text":"#FFFFFF"}},hideEventTypeDetails:false,layout:"month_view"});
 })();
 </script>
 </body>

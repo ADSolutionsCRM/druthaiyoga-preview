@@ -115,7 +115,7 @@ nav .pill{padding:11px 22px;font-size:12px}
 .fhead .d{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-top:8px}
 .fhead .spiral{width:220px;right:-30px;top:-30px}
 .fphoto{flex:1 1 100%;position:relative;margin-top:-60px}
-.fphoto img{width:100%;height:clamp(240px,34vw,400px);object-fit:cover;object-position:50% 62%}
+.fphoto img{width:100%;height:clamp(380px,58vw,680px);object-fit:cover;object-position:50% 0%;transform:scale(1.12);transform-origin:50% 40%;will-change:transform,object-position}
 .fphoto svg.w{position:absolute;left:0;right:0;width:100%;height:70px}
 .fbody{flex:1 1 100%;min-width:0;padding:10px 40px 44px;display:flex;flex-direction:column;gap:22px;align-items:center}
 .flist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:22px 48px;width:100%;max-width:900px}
@@ -262,6 +262,7 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
  .hls{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin:30px -24px 0;padding:6px 24px 16px;gap:16px;scrollbar-width:none}
  .hls::-webkit-scrollbar{display:none}
  .hl{flex:0 0 92px}.hl img{width:84px}
+ .fphoto img{height:clamp(360px,110vw,520px)}
  .quoteband{min-height:0;display:block;background-size:190% auto!important;background-position:50% 0!important;background-repeat:no-repeat;padding:calc(100vw * 0.78) 0 56px}
  .quoteband::before{background:linear-gradient(180deg,rgba(15,46,78,0) 0,rgba(15,46,78,0) calc(100vw * 0.45),#0F2E4E calc(100vw * 0.8))}
  form{padding:26px 20px}
@@ -271,6 +272,14 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
 }
 
 
+
+/* ===== blooming lotus ===== */
+.bloom{display:block;aspect-ratio:611/310;height:auto}
+.bloom .bl-in{position:relative;width:100%;height:100%;transform-origin:50% 95%;transform:scale(calc(.55 + var(--p,1)*.45));opacity:calc(.25 + var(--p,1)*.75)}
+.bloom .pl{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 94%}
+.bloom .l{clip-path:polygon(0 0,50% 0,50% 100%,0 100%);transform:translateX(calc((1 - var(--p,1))*20%)) rotate(calc((1 - var(--p,1))*34deg))}
+.bloom .r{clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%);transform:translateX(calc((1 - var(--p,1))*-20%)) rotate(calc((1 - var(--p,1))*-34deg))}
+.bloom .c{clip-path:polygon(24% 0,76% 0,76% 100%,24% 100%);z-index:2;transform:scale(calc(.82 + var(--p,1)*.18),calc(.9 + var(--p,1)*.1))}
 /* ===== floating monogram ===== */
 #mono{position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(20px) scale(.8);transition:opacity .5s,visibility .5s,transform .5s cubic-bezier(.2,.7,.2,1);text-decoration:none}
 #mono.show{opacity:1;visibility:visible;transform:none}
@@ -365,7 +374,7 @@ nav{gap:18px}
 <div class="hphoto">
 <div class="frame"><img fetchpriority="high" src="img/sunset-warrior2.webp" width="1100" height="1375" alt="Dru in warrior pose at sunset"></div>
 <div class="chip">Practising since<b>2002</b></div>
-<img decoding="async" class="lotus lotus-float" src="img/lotus.webp" alt="">
+<div class="lotus lotus-float bloom" aria-hidden="true" data-bloom="load"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div>
 </div>
 </div>
 <svg class="wave" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,58 C320,120 620,0 980,46 C1180,72 1320,70 1440,40 L1440,110 L0,110Z" fill="#F7F5F1"/></svg>
@@ -431,7 +440,7 @@ nav{gap:18px}
 
 <section class="section" id="about">
 <div class="wrap about">
-<div class="aphoto"><img decoding="async" class="ph" src="img/dru-meditation.webp" alt="Dru meditating in her treatment space" loading="lazy" style="width:100%;object-fit:cover;padding:0"><img decoding="async" class="mini" src="img/sunset-meditate.webp" alt="" loading="lazy"><img decoding="async" class="lotus" src="img/lotus.webp" alt=""></div>
+<div class="aphoto"><img decoding="async" class="ph" src="img/dru-meditation.webp" alt="Dru meditating in her treatment space" loading="lazy" style="width:100%;object-fit:cover;padding:0"><img decoding="async" class="mini" src="img/sunset-meditate.webp" alt="" loading="lazy"><div class="lotus bloom" aria-hidden="true"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div></div>
 <div class="atext">
 <div class="eyebrow">Meet Dru</div>
 <h2>Hi, I’m Dru</h2>
@@ -456,10 +465,10 @@ nav{gap:18px}
 <div class="center"><img decoding="async" src="img/lotus-icon.webp" alt="" style="width:92px;filter:drop-shadow(0 10px 14px rgba(0,150,140,.25))"><div class="eyebrow">Client reviews</div><h2>Kind words</h2></div>
 <p class="swipe small" style="display:none;margin:18px 0 0;text-align:center">Swipe for more reviews →</p>
 <div class="reviews">
-<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>I had my first Thai Yoga massage with Dru and really did not know what to expect… Dru made me feel so welcomed and relaxed. Her gentle touch and expertise had my body and mind feeling refreshed and rejuvenated. I will definitely be back!</blockquote><figcaption>Elena · Client review</figcaption><img decoding="async" class="lotus" src="img/lotus.webp" alt=""></figure>
-<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>I had an absolutely fantastic experience with Dru! I got my massage at an event at my workplace and it was incredibly relaxing and soothing. Dru is so professional and a lovely person. I highly recommend her as she is a talented therapist!</blockquote><figcaption>Moni · Client review</figcaption><img decoding="async" class="lotus" src="img/lotus.webp" alt=""></figure>
-<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>This is an amazing massage. Calm, welcoming, I loved every single minute and 100% cannot wait for the next one! Truly felt amazing after and also really relieved some injury areas.</blockquote><figcaption>Cheryl · Client review</figcaption><img decoding="async" class="lotus" src="img/lotus.webp" alt=""></figure>
-<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>I’m often more than aware I have trouble relaxing but… with Dru’s delivery of her practice I felt at total ease… she took me on a voyage of body and mind and returned me feeling unhindered. A lovely feeling, thank you.</blockquote><figcaption>Emma · Client review</figcaption><img decoding="async" class="lotus" src="img/lotus.webp" alt=""></figure>
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>I had my first Thai Yoga massage with Dru and really did not know what to expect… Dru made me feel so welcomed and relaxed. Her gentle touch and expertise had my body and mind feeling refreshed and rejuvenated. I will definitely be back!</blockquote><figcaption>Elena · Client review</figcaption><div class="lotus bloom" aria-hidden="true"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div></figure>
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>I had an absolutely fantastic experience with Dru! I got my massage at an event at my workplace and it was incredibly relaxing and soothing. Dru is so professional and a lovely person. I highly recommend her as she is a talented therapist!</blockquote><figcaption>Moni · Client review</figcaption><div class="lotus bloom" aria-hidden="true"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div></figure>
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>This is an amazing massage. Calm, welcoming, I loved every single minute and 100% cannot wait for the next one! Truly felt amazing after and also really relieved some injury areas.</blockquote><figcaption>Cheryl · Client review</figcaption><div class="lotus bloom" aria-hidden="true"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div></figure>
+<figure class="rev" style="margin:0"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><span class="q" aria-hidden="true">“</span><blockquote>I’m often more than aware I have trouble relaxing but… with Dru’s delivery of her practice I felt at total ease… she took me on a voyage of body and mind and returned me feeling unhindered. A lovely feeling, thank you.</blockquote><figcaption>Emma · Client review</figcaption><div class="lotus bloom" aria-hidden="true"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div></figure>
 </div>
 </div>
 </section>
@@ -491,7 +500,7 @@ nav{gap:18px}
 <section class="book" id="book">
 <svg class="wave" style="top:-1px;transform:scaleY(-1)" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,58 C320,120 620,0 980,46 C1180,72 1320,70 1440,40 L1440,110 L0,110Z" fill="#F7F5F1"/></svg>
 <svg class="spiral" data-speed="-0.2" style="width:380px;right:-90px;top:60px" aria-hidden="true"><use href="#sp"/></svg>
-<img decoding="async" class="lotus" data-speed="0.12" src="img/lotus.webp" alt="">
+<div class="lotus bloom" data-speed="0.12" aria-hidden="true"><div class="bl-in"><img decoding="async" class="pl l" src="img/lotus.webp" alt=""><img decoding="async" class="pl r" src="img/lotus.webp" alt=""><img decoding="async" class="pl c" src="img/lotus.webp" alt=""></div></div>
 <div class="wrap bgrid">
 <div class="binfo">
 <div class="eyebrow">Book a session</div>
@@ -652,6 +661,29 @@ document.getElementById('fnote').textContent='Your email app should open with th
   if(!raf)raf=requestAnimationFrame(loop);
  },{passive:true});
  m.addEventListener('click',function(e){e.preventDefault();vel-=24;if(!raf)raf=requestAnimationFrame(loop);window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+})();
+</script>
+
+<script>
+(function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var blooms=[].slice.call(document.querySelectorAll('.bloom:not([data-bloom])'));
+ var hero=document.querySelector('.bloom[data-bloom="load"]');
+ var fimg=document.querySelector('.fphoto img'),fwrap=document.querySelector('.fphoto');
+ if(reduce){document.querySelectorAll('.bloom').forEach(function(b){b.style.setProperty('--p',1)});return}
+ blooms.forEach(function(b){b.style.setProperty('--p',0)});
+ // hero lotus blooms once the page opens
+ if(hero){hero.style.setProperty('--p',0);var go=function(){var t0=null;function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/2600),e=1-Math.pow(1-k,3);hero.style.setProperty('--p',e.toFixed(3));if(k<1)requestAnimationFrame(step)}requestAnimationFrame(step)};
+  var wait=function(){if(document.documentElement.classList.contains('intro-open')){setTimeout(wait,200)}else{setTimeout(go,500)}};wait()}
+ var tick=false;
+ function frame(){
+  var vh=window.innerHeight;
+  blooms.forEach(function(b){var r=b.getBoundingClientRect();if(r.bottom<-50||r.top>vh+50)return;var p=(vh-r.top)/(vh*0.55);p=Math.max(0,Math.min(1,p));p=1-Math.pow(1-p,2);b.style.setProperty('--p',p.toFixed(3))});
+  if(fimg){var r=fwrap.getBoundingClientRect();if(r.bottom>0&&r.top<vh){var q=(vh-r.top)/(vh+r.height);q=Math.max(0,Math.min(1,q));fimg.style.objectPosition='50% '+(q*100).toFixed(1)+'%';fimg.style.transform='scale('+(1.12-0.12*Math.min(1,q*1.6)).toFixed(3)+')'}}
+  tick=false;
+ }
+ window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});
+ window.addEventListener('resize',frame);frame();
 })();
 </script>
 </body>

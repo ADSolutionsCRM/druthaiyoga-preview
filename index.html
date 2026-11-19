@@ -323,6 +323,47 @@ footer{padding:64px 0 28px;background:#fff;border-top:1px solid var(--mist)}
 .bsym2{width:70px;height:auto;aspect-ratio:475/429;fill:var(--tq);animation:breathe 8s ease-in-out infinite}
 .bpanel form{flex:none;background:none;backdrop-filter:none;box-shadow:none;border-radius:0;padding:30px 34px 34px}
 @media (max-width:700px){.btabs button{font-size:12.5px;padding:12px 8px}.bpanel form{padding:22px 20px 26px}.calbox{min-height:560px}}
+
+/* ===== demo booking ===== */
+.dbk{padding:22px 26px 18px}
+.dsteps{display:flex;gap:8px;margin-bottom:16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8AA0AE}
+.dsteps span{flex:1;padding-bottom:8px;border-bottom:2px solid var(--mist);transition:.3s}
+.dsteps span.on{color:var(--navy);border-color:var(--tq)}
+.dur{display:flex;gap:10px;margin-bottom:16px}
+.dur button{flex:1;display:flex;justify-content:space-between;align-items:center;font:inherit;font-weight:600;padding:13px 16px;border-radius:16px;border:1.5px solid var(--mist);background:#fff;color:var(--navy);cursor:pointer;transition:.25s}
+.dur button b{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px}
+.dur button[aria-checked=true]{border-color:var(--tq);background:#E3F7F5;box-shadow:0 8px 20px -14px rgba(0,150,140,.8)}
+#ds1:not([hidden]){display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+#ds1 .dur{grid-column:1/-1;margin:0}
+.dmhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.dmhead .serif{font-size:20px}
+.dnav{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--mist);background:#fff;font-size:22px;line-height:1;color:var(--navy);cursor:pointer}
+.dnav:disabled{opacity:.3;cursor:default}
+.dgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.dwk span{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8AA0AE;padding:4px 0}
+.dgrid button,.dgrid i{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font:inherit;font-size:15px;font-style:normal;border:0;background:none;color:#B5C4CC}
+.dgrid button{cursor:pointer;color:var(--navy);font-weight:600;background:#E3F7F5;transition:.2s}
+.dgrid button:hover{background:#B9EFE9}
+.dgrid button[aria-selected=true]{background:var(--navy);color:#fff;box-shadow:0 8px 18px -8px rgba(15,46,78,.6)}
+.dgrid i.today{outline:1.5px solid var(--mist)}
+.dsl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-weight:600}
+.dtimes{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;max-height:330px;overflow:auto;padding:2px}
+.dtimes button{font:inherit;font-weight:600;padding:12px 6px;border-radius:14px;border:1.5px solid var(--tq);background:#fff;color:var(--navy);cursor:pointer;transition:.2s}
+.dtimes button:hover{background:#E3F7F5}
+.dtimes button.taken{border-color:var(--mist);color:#B5C4CC;text-decoration:line-through;cursor:not-allowed;background:#fafbfb}
+.dtimes p{grid-column:1/-1;margin:6px 0}
+.dsum{background:#E3F7F5;border-radius:18px;padding:16px 18px;margin-bottom:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.dsum b{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;display:block}
+#dform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0}
+.chk{flex-direction:row!important;align-items:flex-start;gap:10px!important;font-weight:400!important;font-size:14.5px!important}
+.chk input{width:20px;height:20px;margin-top:2px;accent-color:#00756D}
+.drow{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.dback{background:none;border:0;font:inherit;font-weight:600;color:var(--slate);cursor:pointer;padding:12px 6px}
+.dok{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 0 10px}
+.dok h3{margin:0;font-size:30px}.dok p{margin:0 0 8px;max-width:440px;color:var(--slate)}
+.dnote{margin:16px 0 0;font-size:12.5px;color:#8AA0AE;text-align:center}
+.dstep{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+@media (max-width:760px){#ds1:not([hidden]){grid-template-columns:1fr}#dform{grid-template-columns:1fr}.dbk{padding:18px 16px 14px}.dsteps{font-size:10.5px}.dur button{padding:12px}.dur button b{font-size:18px}}
 /* ===== blooming lotus ===== */
 .bloom{display:block;aspect-ratio:611/310;height:auto}
 .bloom .bl-in{position:relative;width:100%;height:100%;transform-origin:50% 95%;transform:scale(calc(.55 + var(--p,1)*.45));opacity:calc(.25 + var(--p,1)*.75)}
@@ -569,12 +610,40 @@ nav{gap:18px}
 </div>
 <div id="pane-cal" role="tabpanel" aria-labelledby="tab-cal" class="bpane">
 <div id="cal-inline" class="calbox"></div>
-<div id="cal-soon" class="calsoon" hidden>
-<svg class="bsym2" aria-hidden="true"><use href="#sp"/></svg>
-<h3 class="serif">Online booking opens soon</h3>
-<p>Live availability is being set up. Until then, send a quick enquiry and Dru will confirm a time with you.</p>
-<button type="button" class="pill navy" id="goAsk">Send an enquiry</button>
+<div id="demo-book" class="dbk" hidden>
+<div class="dsteps" aria-hidden="true"><span class="on">1 · Date &amp; time</span><span>2 · Your details</span><span>3 · Request sent</span></div>
+<div class="dstep" id="ds1">
+<div class="dur" role="radiogroup" aria-label="Session length">
+<button type="button" role="radio" aria-checked="true" data-m="60">1 hour<b>£65</b></button>
+<button type="button" role="radio" aria-checked="false" data-m="90">90 minutes<b>£85</b></button>
 </div>
+<div class="dcal">
+<div class="dmhead"><button type="button" class="dnav" id="dprev" aria-label="Previous month">‹</button><div id="dmonth" class="serif"></div><button type="button" class="dnav" id="dnext" aria-label="Next month">›</button></div>
+<div class="dgrid dwk" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+<div class="dgrid" id="ddays" role="grid"></div>
+</div>
+<div class="dslots"><div class="dsl-head"><span id="dday">Choose a day</span><span class="small">UK time</span></div><div id="dtimes" class="dtimes"><p class="small">Days with free times are highlighted.</p></div></div>
+</div>
+<div class="dstep" id="ds2" hidden>
+<div class="dsum" id="dsum"></div>
+<form id="dform" novalidate>
+<label>Name<input name="n" autocomplete="name" required></label>
+<label>Phone<input name="p" type="tel" autocomplete="tel" required></label>
+<label class="full">Email<input name="e" type="email" autocomplete="email" required></label>
+<label class="full">Anything Dru should know?<textarea name="m" rows="3" placeholder="Areas of tension, injuries, pregnancy…"></textarea></label>
+<label class="chk full"><input type="checkbox" name="first"> This is my first session (founding offer: £10 off for the first 5 clients)</label>
+<div class="full drow"><button type="button" class="dback" id="dback">‹ Back</button><button type="submit" class="pill navy">Request this booking</button></div>
+<p class="formnote full" id="dnote" role="status"></p>
+</form>
+</div>
+<div class="dstep dok" id="ds3" hidden>
+<svg class="bsym2" aria-hidden="true"><use href="#sp"/></svg>
+<h3 class="serif">Request sent</h3>
+<p id="dokmsg"></p>
+<div class="drow" style="justify-content:center"><button type="button" class="pill frost" id="dics">Add to my calendar</button><button type="button" class="dback" id="dagain">Book another</button></div>
+</div>
+<p class="dnote">Demo booking calendar. Dru will confirm your appointment personally.</p>
+</div></div>
 </div>
 <div id="pane-ask" role="tabpanel" aria-labelledby="tab-ask" class="bpane" hidden>
 <form id="enq">
@@ -776,6 +845,70 @@ document.getElementById('fnote').textContent='Your email app should open with th
 })();
 </script>
 
+
+<script>
+window.DTY_DEMO=function(){
+ var DAYS=[1,2,4,5],OPEN=9*60+30,CLOSE=14*60+30,BUF=30,STEP=30,NOTICE=12*60,AHEAD=56,PRICE={60:65,90:85};
+ var dur=60,sel=null,slot=null,view=new Date();view.setDate(1);
+ var $=function(i){return document.getElementById(i)};
+ var stored=[];try{stored=JSON.parse(localStorage.getItem('dty-demo-bookings')||'[]')}catch(e){}
+ function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+ function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+ function busy(d){var k=key(d),h=hash(k),b=[],n=h%3; // 0-2 existing appointments, seeded so it looks the same for everyone
+  for(var i=0;i<n;i++){var s=OPEN+(((h>>(i*5+3))%9)*STEP);var L=((h>>(i+11))&1)?90:60;if(s+L<=CLOSE)b.push([s,s+L])}
+  stored.forEach(function(x){if(x.d===k)b.push([x.s,x.s+x.l])});return b}
+ function slots(d){var now=new Date(),out=[],b=busy(d);
+  for(var s=OPEN;s+dur<=CLOSE;s+=STEP){var dt=new Date(d);dt.setHours(0,s,0,0);
+   var tooSoon=(dt-now)/60000<NOTICE,clash=b.some(function(x){return s<x[1]+BUF&&x[0]<s+dur+BUF});
+   out.push({s:s,ok:!tooSoon&&!clash,past:tooSoon})}
+  return out.filter(function(x){return !x.past})}
+ function fmt(m){var h=Math.floor(m/60),mm=m%60;return (h>12?h-12:h)+':'+String(mm).padStart(2,'0')+(h>=12?'pm':'am')}
+ function nice(d){return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})}
+ var today=new Date();today.setHours(0,0,0,0);var last=new Date(today);last.setDate(last.getDate()+AHEAD);
+ function bookable(d){var wd=d.getDay();return d>=today&&d<=last&&DAYS.indexOf(wd)>-1&&slots(d).some(function(x){return x.ok})}
+ function render(){
+  $('dmonth').textContent=view.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+  var first=new Date(view),off=(first.getDay()+6)%7,dim=new Date(view.getFullYear(),view.getMonth()+1,0).getDate(),h='';
+  for(var i=0;i<off;i++)h+='<i></i>';
+  for(var dd=1;dd<=dim;dd++){var d=new Date(view.getFullYear(),view.getMonth(),dd);
+   if(bookable(d))h+='<button type="button" role="gridcell" data-k="'+key(d)+'" aria-selected="'+(sel&&key(sel)===key(d))+'" aria-label="'+nice(d)+', times available">'+dd+'</button>';
+   else h+='<i class="'+(+d===+today?'today':'')+'" aria-hidden="true">'+dd+'</i>'}
+  $('ddays').innerHTML=h;
+  $('dprev').disabled=view.getFullYear()===today.getFullYear()&&view.getMonth()===today.getMonth();
+  $('dnext').disabled=new Date(view.getFullYear(),view.getMonth()+1,1)>last;
+  times()}
+ function times(){
+  if(!sel){$('dday').textContent='Choose a day';$('dtimes').innerHTML='<p class="small">Days with free times are highlighted.</p>';return}
+  $('dday').textContent=nice(sel);
+  $('dtimes').innerHTML=slots(sel).map(function(x){return x.ok?'<button type="button" data-s="'+x.s+'">'+fmt(x.s)+'</button>':'<button type="button" class="taken" disabled aria-label="'+fmt(x.s)+' booked">'+fmt(x.s)+'</button>'}).join('')||'<p class="small">No times left on this day.</p>'}
+ function step(n){[1,2,3].forEach(function(i){$('ds'+i).hidden=i!==n});document.querySelectorAll('.dsteps span').forEach(function(s,i){s.classList.toggle('on',i<n)})}
+ document.querySelectorAll('.dur button').forEach(function(b){b.addEventListener('click',function(){dur=+b.dataset.m;document.querySelectorAll('.dur button').forEach(function(x){x.setAttribute('aria-checked',x===b)});render()})});
+ $('dprev').addEventListener('click',function(){view.setMonth(view.getMonth()-1);render()});
+ $('dnext').addEventListener('click',function(){view.setMonth(view.getMonth()+1);render()});
+ $('ddays').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var p=b.dataset.k.split('-');sel=new Date(+p[0],p[1]-1,+p[2]);render();
+  if(window.innerWidth<760)$('dtimes').scrollIntoView({behavior:'smooth',block:'nearest'})});
+ $('dtimes').addEventListener('click',function(e){var b=e.target.closest('button[data-s]');if(!b)return;slot=+b.dataset.s;
+  $('dsum').innerHTML='<div><span class="eyebrow">Thai Yoga Massage · '+(dur===60?'1 hour':'90 minutes')+'</span><b>'+nice(sel)+' · '+fmt(slot)+'–'+fmt(slot+dur)+'</b></div><b>£'+PRICE[dur]+'</b>';step(2);var i=$('dform').querySelector('input');if(i)i.focus({preventScroll:true})});
+ $('dback').addEventListener('click',function(){step(1)});
+ $('dform').addEventListener('submit',function(e){e.preventDefault();var f=e.target;
+  if(!f.checkValidity()){f.reportValidity();$('dnote').textContent='Please add your name, phone and email.';return}
+  var v=function(n){return (f.elements[n].value||'').trim()},first=f.elements.first.checked,price=PRICE[dur]-(first?10:0);
+  stored.push({d:key(sel),s:slot,l:dur});try{localStorage.setItem('dty-demo-bookings',JSON.stringify(stored))}catch(err){}
+  var when=nice(sel)+', '+fmt(slot)+'–'+fmt(slot+dur);
+  var body='Booking request\n\nSession: Thai Yoga Massage, '+(dur===60?'1 hour':'90 minutes')+' (£'+price+(first?', founding offer applied':'')+')\nWhen: '+when+'\n\nName: '+v('n')+'\nPhone: '+v('p')+'\nEmail: '+v('e')+'\n\n'+v('m');
+  $('dokmsg').innerHTML='Thank you, '+v('n').split(' ')[0].replace(/[<>&]/g,'')+'. Your request for <b>'+when+'</b> (£'+price+') is ready to send. Your email app will open; just press send and Dru will confirm by phone or email.';
+  step(3);
+  window.location.href='mailto:druthaiyoga@gmail.com?subject='+encodeURIComponent('Booking request: '+when)+'&body='+encodeURIComponent(body);
+  window.__dtyLast={sel:new Date(sel),slot:slot,dur:dur}});
+ $('dics').addEventListener('click',function(){var L=window.__dtyLast;if(!L)return;var s=new Date(L.sel);s.setHours(0,L.slot,0,0);var e2=new Date(s.getTime()+L.dur*60000);
+  var z=function(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'T'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+'00'};
+  var ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Dru Thai Yoga//EN\r\nBEGIN:VEVENT\r\nUID:'+Date.now()+'@druthaiyoga\r\nDTSTAMP:'+z(new Date())+'\r\nDTSTART;TZID=Europe/London:'+z(s)+'\r\nDTEND;TZID=Europe/London:'+z(e2)+'\r\nSUMMARY:Thai Yoga Massage with Dru (awaiting confirmation)\r\nLOCATION:Farnham GU10\r\nDESCRIPTION:Dru Thai Yoga · 07359 185626\r\nEND:VEVENT\r\nEND:VCALENDAR';
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='dru-thai-yoga.ics';document.body.appendChild(a);a.click();a.remove()});
+ $('dagain').addEventListener('click',function(){slot=null;$('dform').reset();step(1);render()});
+ // open on the first month that has availability
+ render();
+};
+</script>
 <script>
 /* ============ ONLINE BOOKING (Cal.com) ============
    Set CAL_LINK to Dru's Cal.com username, e.g. "druthaiyoga"
@@ -788,8 +921,7 @@ var CAL_LINK = "";
  var tc=document.getElementById('tab-cal'),ta=document.getElementById('tab-ask'),pc=document.getElementById('pane-cal'),pa=document.getElementById('pane-ask');
  function show(which){var cal=which==='cal';tc.setAttribute('aria-selected',cal);ta.setAttribute('aria-selected',!cal);pc.hidden=!cal;pa.hidden=cal}
  tc.addEventListener('click',function(){show('cal')});ta.addEventListener('click',function(){show('ask')});
- document.getElementById('goAsk').addEventListener('click',function(){show('ask');var i=pa.querySelector('input');if(i)i.focus()});
- if(!CAL_LINK){document.getElementById('cal-soon').hidden=false;return}
+  if(!CAL_LINK){document.getElementById('demo-book').hidden=false;window.DTY_DEMO&&window.DTY_DEMO();return}
  (function (C, A, L) { var p = function (a, ar) { a.q.push(ar); }; var d = C.document; C.Cal = C.Cal || function () { var cal = C.Cal; var ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { var api = function () { p(api, arguments); }; var namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
  Cal("init","dru",{origin:"https://app.cal.com"});
  Cal.ns.dru("inline",{elementOrSelector:"#cal-inline",calLink:CAL_LINK,config:{layout:"month_view",theme:"light","ui.autoscroll":"false"}});

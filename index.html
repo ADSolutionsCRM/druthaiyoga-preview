@@ -361,6 +361,7 @@ footer{padding:64px 0 28px;background:#fff;border-top:1px solid var(--mist)}
 .dback{background:none;border:0;font:inherit;font-weight:600;color:var(--slate);cursor:pointer;padding:12px 6px}
 .dok{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 0 10px}
 .dok h3{margin:0;font-size:30px}.dok p{margin:0 0 8px;max-width:440px;color:var(--slate)}
+.asklink{background:none;border:0;font:inherit;font-size:15px;font-weight:600;color:var(--teal);cursor:pointer;padding:10px;text-decoration:underline;text-underline-offset:4px}
 .dnote{margin:16px 0 0;font-size:12.5px;color:#8AA0AE;text-align:center}
 .dstep{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
 @media (max-width:760px){#ds1:not([hidden]){grid-template-columns:1fr}#dform{grid-template-columns:1fr}.dbk{padding:18px 16px 14px}.dsteps{font-size:10.5px}.dur button{padding:12px}.dur button b{font-size:18px}}
@@ -606,7 +607,7 @@ nav{gap:18px}
 <div class="bpanel">
 <div class="btabs" role="tablist" aria-label="Booking options">
 <button type="button" role="tab" id="tab-cal" aria-selected="true" aria-controls="pane-cal">Check availability &amp; book</button>
-<button type="button" role="tab" id="tab-ask" aria-selected="false" aria-controls="pane-ask">Ask a question</button>
+<button type="button" role="tab" id="tab-ask" aria-selected="false" aria-controls="pane-ask">Ask a question ✉</button>
 </div>
 <div id="pane-cal" role="tabpanel" aria-labelledby="tab-cal" class="bpane">
 <div id="cal-inline" class="calbox"></div>
@@ -642,7 +643,7 @@ nav{gap:18px}
 <p id="dokmsg"></p>
 <div class="drow" style="justify-content:center"><button type="button" class="pill frost" id="dics">Add to my calendar</button><button type="button" class="dback" id="dagain">Book another</button></div>
 </div>
-<p class="dnote">Demo booking calendar. Dru will confirm your appointment personally.</p>
+<p class="dnote"><button type="button" class="asklink" id="askLink">Have a question first? Ask Dru →</button><br>Demo booking calendar. Dru will confirm your appointment personally.</p>
 </div></div>
 </div>
 <div id="pane-ask" role="tabpanel" aria-labelledby="tab-ask" class="bpane" hidden>
@@ -920,7 +921,7 @@ var CAL_LINK = "";
  var q=new URLSearchParams(location.search).get('cal');if(q)CAL_LINK=q.replace(/[^a-zA-Z0-9_\-\/]/g,'');
  var tc=document.getElementById('tab-cal'),ta=document.getElementById('tab-ask'),pc=document.getElementById('pane-cal'),pa=document.getElementById('pane-ask');
  function show(which){var cal=which==='cal';tc.setAttribute('aria-selected',cal);ta.setAttribute('aria-selected',!cal);pc.hidden=!cal;pa.hidden=cal}
- tc.addEventListener('click',function(){show('cal')});ta.addEventListener('click',function(){show('ask')});
+ tc.addEventListener('click',function(){show('cal')});ta.addEventListener('click',function(){show('ask')});var al=document.getElementById('askLink');if(al)al.addEventListener('click',function(){show('ask');ta.focus()});
   if(!CAL_LINK){document.getElementById('demo-book').hidden=false;window.DTY_DEMO&&window.DTY_DEMO();return}
  (function (C, A, L) { var p = function (a, ar) { a.q.push(ar); }; var d = C.document; C.Cal = C.Cal || function () { var cal = C.Cal; var ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { var api = function () { p(api, arguments); }; var namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
  Cal("init","dru",{origin:"https://app.cal.com"});

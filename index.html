@@ -39,7 +39,7 @@ nav a{text-decoration:none}
 nav a:not(.pill):hover{color:var(--teal)}
 nav .pill{padding:11px 22px;font-size:12px}
 /* hero */
-.hero{position:relative;overflow:hidden;background:var(--wash);padding:80px 0 0;text-align:center}
+.hero{position:relative;overflow:hidden;background:var(--wash);padding:72px 0 150px;text-align:center}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:260px;background:radial-gradient(ellipse 60% 100% at 50% 100%,rgba(84,170,120,.30),transparent 70%);z-index:1}
 .hero .logo{width:min(560px,86%);margin:0 auto;filter:drop-shadow(0 8px 18px rgba(255,255,255,.6))}
 .hero .tag{font-size:clamp(20px,2.4vw,26px);line-height:1.45;max-width:620px;margin:26px auto 0}
@@ -48,6 +48,29 @@ nav .pill{padding:11px 22px;font-size:12px}
 .hero .lotus{position:relative;z-index:4;width:min(560px,82%);margin:40px auto -70px;filter:drop-shadow(0 18px 24px rgba(15,46,78,.22))}
 .hero .wave{bottom:-1px}
 .badges{display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;margin-top:26px;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.hgrid{display:flex;flex-wrap:wrap;align-items:center;gap:48px;text-align:left}
+.hcopy{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.hcopy .logo{width:min(480px,100%);margin:0}
+.hcopy .tag{margin:24px 0 0;text-align:left}
+.hcopy .rule{margin:24px 0}
+.hcopy .badges{justify-content:flex-start}
+.hcopy .ctas{justify-content:flex-start}
+.hphoto{flex:1 1 380px;min-width:0;position:relative;max-width:500px;margin:0 auto}
+.hphoto .frame{border-radius:260px 260px 32px 32px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(15,46,78,.45),0 0 0 10px rgba(255,255,255,.55);aspect-ratio:4/5}
+.hphoto .frame img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hphoto .lotus{position:absolute;width:62%;left:-18%;bottom:-46px;margin:0;z-index:4;filter:drop-shadow(0 18px 24px rgba(15,46,78,.25))}
+.hphoto .chip{position:absolute;right:-10px;top:40px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:18px;padding:12px 18px;box-shadow:var(--shadow);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;z-index:4}
+.hphoto .chip b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:24px;letter-spacing:0;text-transform:none;font-weight:500}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:22px;margin-top:48px}
+.gallery a{display:block;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5;transition:transform .3s,box-shadow .3s}
+.gallery a:hover{transform:translateY(-6px);box-shadow:0 34px 60px -24px rgba(15,46,78,.4)}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.aphoto .mini{position:absolute;width:42%;right:-6%;bottom:-36px;border-radius:50%;aspect-ratio:1;object-fit:cover;border:8px solid #fff;box-shadow:var(--shadow);z-index:3}
+.quoteband{position:relative;overflow:hidden;min-height:520px;display:flex;align-items:center;background:#0F2E4E url(img/sunset-meditate.jpg) center 40%/cover}
+.quoteband::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,46,78,.82),rgba(15,46,78,.35) 60%,rgba(15,46,78,.1))}
+.quoteband .wrap{color:#fff;width:100%}
+.quoteband blockquote{margin:0;max-width:620px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,4vw,48px);line-height:1.2}
+.quoteband blockquote i{font-family:Lora,Georgia,serif}
 /* treatments */
 .section{position:relative;padding:110px 0}
 .center{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -69,7 +92,7 @@ nav .pill{padding:11px 22px;font-size:12px}
 .fhead .d{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-top:8px}
 .fhead .spiral{width:220px;right:-30px;top:-30px}
 .fphoto{flex:1 1 100%;position:relative;margin-top:-60px}
-.fphoto img{width:100%;height:clamp(240px,34vw,400px);object-fit:cover;object-position:50% 55%}
+.fphoto img{width:100%;height:clamp(240px,34vw,400px);object-fit:cover;object-position:50% 62%}
 .fphoto svg.w{position:absolute;left:0;right:0;width:100%;height:70px}
 .fbody{flex:1 1 100%;padding:10px 40px 44px;display:flex;flex-direction:column;gap:22px;align-items:center}
 .flist{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px 48px;width:100%;max-width:900px}
@@ -84,7 +107,7 @@ nav .pill{padding:11px 22px;font-size:12px}
 .about{display:flex;flex-wrap:wrap;gap:60px;align-items:center}
 .aphoto{flex:1 1 360px;min-width:0;position:relative}
 .aphoto .ph{aspect-ratio:4/5;border-radius:200px 200px 28px 28px;background:linear-gradient(170deg,#E3FBF8,#9BE9E1);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--slate);font-size:15px;padding:30px}
-.aphoto .lotus{position:absolute;width:62%;left:-8%;bottom:-40px;filter:drop-shadow(0 14px 18px rgba(15,46,78,.2))}
+.aphoto .lotus{position:absolute;width:52%;left:-10%;bottom:-40px;z-index:4;filter:drop-shadow(0 14px 18px rgba(15,46,78,.2))}
 .atext{flex:999 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;margin-top:48px}
@@ -145,16 +168,22 @@ footer .fb img{width:70px}
 <section class="hero" id="top">
 <svg class="spiral" style="width:420px;left:-120px;top:-60px" aria-hidden="true"><use href="#sp"/></svg>
 <svg class="spiral" style="width:300px;right:-80px;top:220px;opacity:.28" aria-hidden="true"><use href="#sp"/></svg>
-<div class="wrap">
+<div class="wrap hgrid">
+<div class="hcopy">
 <img class="logo" src="img/logo.png" alt="Dru Thai Yoga, Mobile Traditional Thai Massage and 1:1 Yoga in Farnham">
 <p class="tag ital">Deeply therapeutic bodywork tailored to you, in the comfort of your own home.</p>
 <div class="rule"></div>
 <div class="ctas">
-<a class="pill frost" href="#book">Book a session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-<a class="pill navy" href="#treatments">View treatments</a>
+<a class="pill navy" href="#book">Book a session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="pill frost" href="#treatments">View treatments</a>
 </div>
 <div class="badges"><span>Mobile · I come to you</span><span>Bespoke treatments</span><span>Female clients only</span></div>
+</div>
+<div class="hphoto">
+<div class="frame"><img src="img/sunset-warrior2.jpg" alt="Dru in warrior pose at sunset"></div>
+<div class="chip">Practising since<b>2002</b></div>
 <img class="lotus" src="img/lotus.png" alt="">
+</div>
 </div>
 <svg class="wave" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,58 C320,120 620,0 980,46 C1180,72 1320,70 1440,40 L1440,110 L0,110Z" fill="#F7F5F1"/></svg>
 </section>
@@ -187,7 +216,7 @@ footer .fb img{width:70px}
 </div>
 <div class="fphoto">
 <svg class="w" style="top:-1px" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 L1000,0 L1000,18 C760,70 300,-10 0,52Z" fill="#3ED5C9"/></svg>
-<img src="https://druheals.my.canva.site/_assets/media/411ce60906fa0ff7a17a064e3c6717ae.jpg" alt="Dru giving a Thai yoga massage" loading="lazy">
+<img src="img/treatment-room.jpg" alt="Dru giving a Thai yoga massage in her treatment room" loading="lazy">
 <svg class="w" style="bottom:-1px" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C260,0 640,70 1000,24 L1000,70 L0,70Z" fill="#fff"/></svg>
 </div>
 <div class="fbody">
@@ -206,7 +235,7 @@ footer .fb img{width:70px}
 
 <section class="section" id="about">
 <div class="wrap about">
-<div class="aphoto"><img class="ph" src="https://druheals.my.canva.site/_assets/media/8704ea2da6e632b150ab195f92546c52.jpg" alt="Dru in her treatment space" loading="lazy" style="width:100%;object-fit:cover;padding:0"><img class="lotus" src="img/lotus.png" alt=""></div>
+<div class="aphoto"><img class="ph" src="img/dru-meditation.jpg" alt="Dru meditating in her treatment space" loading="lazy" style="width:100%;object-fit:cover;padding:0"><img class="mini" src="img/sunset-meditate.jpg" alt="" loading="lazy"><img class="lotus" src="img/lotus.png" alt=""></div>
 <div class="atext">
 <div class="eyebrow">Meet Dru</div>
 <h2>Hi, I’m Dru</h2>
@@ -221,7 +250,12 @@ footer .fb img{width:70px}
 </div>
 </section>
 
-<section class="section" id="reviews" style="padding-top:40px">
+<section class="quoteband" aria-label="Philosophy">
+<div class="wrap"><blockquote>“Look after your body,<br><i>and your body will look after you.”</i></blockquote>
+<div class="rule" style="width:70px;height:2px;background:#00D6C6;margin:26px 0"></div>
+<a class="pill frost" href="#book">Begin your journey <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</section>
+<section class="section" id="reviews">
 <div class="wrap">
 <div class="center"><img src="img/lotus-icon.png" alt="" style="width:92px;filter:drop-shadow(0 10px 14px rgba(0,150,140,.25))"><div class="eyebrow">Client reviews</div><h2>Kind words</h2></div>
 <div class="reviews">
@@ -236,8 +270,17 @@ footer .fb img{width:70px}
 <section class="section" style="padding-top:20px">
 <div class="wrap center">
 <img class="profile" src="img/profile.png" alt="Dru Thai Yoga Instagram profile picture">
-<div class="eyebrow" style="margin-top:10px">Follow along</div>
+<div class="eyebrow" style="margin-top:10px">Follow along on Instagram</div>
 <a href="https://www.instagram.com/druthaiyoga/" class="serif" style="font-size:34px;text-decoration:none">@druthaiyoga</a>
+<div class="gallery">
+<a href="https://www.instagram.com/druthaiyoga/"><img src="img/post-stretch.jpg" alt="Healing massage and a deep stretch" loading="lazy"></a>
+<a href="https://www.instagram.com/druthaiyoga/"><img src="img/quote.jpg" alt="Trusting life is the key that sets you free" loading="lazy"></a>
+<a href="https://www.instagram.com/druthaiyoga/"><img src="img/post-spine.jpg" alt="Healthy spine, happy life" loading="lazy"></a>
+<a href="https://www.instagram.com/druthaiyoga/"><img src="img/sunset-tree.jpg" alt="Dru in tree pose at sunset" loading="lazy"></a>
+<a href="https://www.instagram.com/druthaiyoga/"><img src="img/riverside.jpg" alt="Dru by the river" loading="lazy"></a>
+<a href="https://www.instagram.com/druthaiyoga/"><img src="img/sunset-warrior.jpg" alt="Dru in warrior pose on the salt flats" loading="lazy"></a>
+</div>
+<div class="eyebrow" style="margin-top:44px">Story highlights</div>
 <div class="hls">
 <a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/lotus-icon.png" alt=""><span>Reviews</span></a>
 <a class="hl" href="https://www.instagram.com/druthaiyoga/"><img src="img/yoga.png" alt=""><span>Yoga</span></a>

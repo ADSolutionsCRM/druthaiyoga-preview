@@ -4,6 +4,6 @@ Preview website for Dru Thai Yoga, mobile Thai yoga massage and 1:1 yoga in Farn
 
 Static site (`index.html` + `img/`), ready for GitHub Pages.
 
-Placeholders in [brackets] are waiting for real details (prices, contact, bio, reviews).
+Content, prices, reviews and photos from Dru's current site (druheals.my.canva.site).
 
 Built by ADSolutions.

@@ -63,6 +63,18 @@ nav .pill{padding:11px 22px;font-size:12px}
 .hphoto .lotus{position:absolute;width:62%;left:-18%;bottom:-46px;margin:0;z-index:4;filter:drop-shadow(0 18px 24px rgba(15,46,78,.25))}
 .hphoto .chip{position:absolute;right:-10px;top:40px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:18px;padding:12px 18px;box-shadow:var(--shadow);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;z-index:4}
 .hphoto .chip b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:24px;letter-spacing:0;text-transform:none;font-weight:500}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;margin-top:28px}
+.offer{position:relative;overflow:hidden;border-radius:28px;padding:34px 32px;box-shadow:var(--shadow);display:flex;gap:22px;align-items:center}
+.offer.a{background:linear-gradient(140deg,#0F2E4E,#1D4C73);color:#fff}
+.offer.b{background:radial-gradient(ellipse 120% 100% at 20% 10%,#EFFFFD,#9FEAE2 60%,#4FD6CB)}
+.offer .amt{flex-shrink:0;width:112px;height:112px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;line-height:1}
+.offer.a .amt{background:#00D6C6;color:#0F2E4E}
+.offer.b .amt{background:#fff;color:#0F2E4E;box-shadow:0 10px 24px -10px rgba(15,46,78,.35)}
+.offer .amt b{font-size:38px;font-weight:500}.offer .amt small{font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+.offer h3{margin:0 0 6px;font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:25px;line-height:1.2}
+.offer p{margin:0;font-size:15.5px}
+.offer.a p{color:#C9F4F0}
+.offer .spiral{width:170px;right:-40px;bottom:-50px;top:auto;opacity:.12}
 .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:22px;margin-top:48px}
 .gallery a{display:block;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5;transition:transform .3s,box-shadow .3s}
 .gallery a:hover{transform:translateY(-6px);box-shadow:0 34px 60px -24px rgba(15,46,78,.4)}
@@ -180,7 +192,7 @@ footer .fb img{width:70px}
 <a class="pill navy" href="#book">Book a session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 <a class="pill frost" href="#treatments">View treatments</a>
 </div>
-<div class="badges"><span>Bespoke treatments</span><span>Female clients only</span><span>Farnham GU10</span></div>
+<div class="badges"><span>Bespoke treatments</span><span>Female clients only</span><a href="#offers" style="text-decoration:none;color:var(--teal)">£10 off your first session →</a></div>
 </div>
 <div class="hphoto">
 <div class="frame"><img src="img/sunset-warrior2.jpg" alt="Dru in warrior pose at sunset"></div>
@@ -212,7 +224,11 @@ footer .fb img{width:70px}
 <a class="pill navy" href="#book" style="align-self:flex-start">Book your session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </div>
 </div>
-<p class="small" style="text-align:center;margin:22px 0 0">Female clients only. Corporate bookings are open to all genders.</p>
+<div class="offers" id="offers">
+<div class="offer a"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><div class="amt"><b>£10</b><small>off</small></div><div><div class="eyebrow" style="color:#00D6C6">Founding offer</div><h3>Your first session</h3><p>£10 off for my first 5 new clients. Mention it when you book.</p></div></div>
+<div class="offer b"><svg class="spiral" aria-hidden="true"><use href="#sp"/></svg><div class="amt"><b>£15</b><small>off</small></div><div><div class="eyebrow">Loyalty reward</div><h3>Your 5th booking</h3><p>A thank you for coming back: £15 off every 5th session.</p></div></div>
+</div>
+<p class="small" style="text-align:center;margin:22px 0 0">Female clients only. Corporate bookings are open to all genders. Offers can't be combined on the same session.</p>
 </div>
 </section>
 
@@ -319,7 +335,7 @@ footer .fb img{width:70px}
 <form id="enq">
 <label>Name<input type="text" name="name" autocomplete="name"></label>
 <label>Phone or email<input type="text" name="contact"></label>
-<label>Session<select name="treatment"><option>Thai Yoga Massage · 1 hour · £65</option><option>Thai Yoga Massage · 90 minutes · £85</option><option>Corporate / event booking</option><option>Not sure yet</option></select></label>
+<label>Session<select name="treatment"><option>Thai Yoga Massage · 1 hour · £65</option><option>Thai Yoga Massage · 90 minutes · £85</option><option>First session (founding offer, £10 off)</option><option>Corporate / event booking</option><option>Not sure yet</option></select></label>
 <label>Preferred days / times<input type="text" name="when"></label>
 <label class="full">Message<textarea name="msg" rows="4"></textarea></label>
 <button class="pill navy full" type="submit">Send enquiry by email</button>

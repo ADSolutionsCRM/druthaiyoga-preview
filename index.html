@@ -309,6 +309,8 @@ html.intro-open .hcopy>*,html.intro-open .hphoto,html.intro-open .hphoto .frame 
 #snd:not(.on)::after{content:"";position:absolute;width:24px;height:2px;background:currentColor;transform:rotate(-45deg);border-radius:2px}
 @keyframes eq{0%,100%{height:5px}50%{height:16px}}
 nav{gap:18px}
+@media (max-width:700px){header nav{flex-wrap:nowrap}header #snd{width:40px;height:40px}}
+@media (max-width:420px){.bk-long{display:none}header nav .pill{padding:11px 18px}}
 @media (prefers-reduced-motion:reduce){#intro .bsym,#intro .ring{animation:none!important}}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation:none!important;transition:none!important}
@@ -340,7 +342,7 @@ nav{gap:18px}
 <nav aria-label="Main">
 <a href="#treatments">Treatments</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a>
 <button id="snd" type="button" aria-label="Turn relaxing sound on" aria-pressed="false" title="Relaxing sound"><span></span><span></span><span></span><span></span></button>
-<a class="pill navy" href="#book">Book a session</a>
+<a class="pill navy" href="#book">Book<span class="bk-long"> a session</span></a>
 </nav>
 </div>
 </header>

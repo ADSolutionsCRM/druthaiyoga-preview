@@ -478,7 +478,7 @@ nav{gap:18px}
 <button class="pill frost" id="enterSound" type="button">Enter with sound <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
 <button class="quiet" id="enterQuiet" type="button">Enter quietly</button>
 </div>
-<div class="hp">Tanpura &amp; bamboo flute · best with headphones</div>
+<div class="hp">Ancient Greek lyre, in the Dorian mode · best with headphones</div>
 </div>
 </div>
 <a id="mono" href="#top" aria-label="Back to top"><span class="fl"><svg aria-hidden="true"><use href="#sp"/></svg></span><span class="tip">Back to top</span></a>
@@ -781,7 +781,7 @@ document.getElementById('fnote').textContent='Your email app should open with th
  var seen=false;try{seen=sessionStorage.getItem('dty-intro')==='1'}catch(e){}
  // ---- music engine ----
  // To use a real recording instead, add the file to the site (e.g. audio/ambience.mp3)
- // and set MUSIC_FILE below. Otherwise a live tanpura + bansuri-style flute is played.
+ // and set MUSIC_FILE below. Otherwise a live lyre melody (D Dorian) is played.
  var MUSIC_FILE = "";
  var A=null;
  function build(){
@@ -797,68 +797,56 @@ document.getElementById('fnote').textContent='Your email app should open with th
   // warm hall reverb
   var len=sr*5.5,ir=c.createBuffer(2,len,sr);
   for(var ch=0;ch<2;ch++){var d=ir.getChannelData(ch);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2)}
-  var verb=c.createConvolver();verb.buffer=ir;var wet=c.createGain();wet.gain.value=.5;verb.connect(wet);wet.connect(master);
-  // ---- tanpura: plucked strings (Karplus-Strong) with jawari buzz ----
-  function string(f,secs,decay,bright){
-   var n=Math.floor(sr*secs),buf=c.createBuffer(1,n,sr),y=buf.getChannelData(0),N=Math.round(sr/f),i;
-   for(i=0;i<N;i++)y[i]=(Math.random()*2-1)*(i<N*bright?1:.35);
-   for(i=N+1;i<n;i++){var v=decay*.5*(y[i-N]+y[i-N-1]);y[i]=v}
-   // jawari: gentle asymmetric saturation adds the shimmering buzz
-   var peak=0;for(i=0;i<n;i++){var x=y[i];y[i]=Math.tanh(x*2.2+.18*x*x);if(Math.abs(y[i])>peak)peak=Math.abs(y[i])}
-   for(i=0;i<n;i++)y[i]=y[i]/peak*(1-Math.min(1,i/n))*1;
-   return buf;
+  var verb=c.createConvolver();verb.buffer=ir;var wet=c.createGain();wet.gain.value=.42;verb.connect(wet);wet.connect(master);
+  // ---- ancient Greek lyre (kithara): plucked gut strings modelled acoustically ----
+  var cache={};
+  function lyreBuf(f){
+   var key=Math.round(f*10);if(cache[key])return cache[key];
+   var secs=f<120?5:3.4,n=Math.floor(sr*secs),buf=c.createBuffer(1,n,sr),y=buf.getChannelData(0),N=sr/f,Ni=Math.floor(N),fr=N-Ni,i;
+   // soft, finger-plucked excitation (smoothed noise, plucked near the middle)
+   var prev=0;for(i=0;i<=Ni+1;i++){var r=Math.random()*2-1;prev=prev*.55+r*.45;y[i]=prev*Math.sin(Math.PI*i/(Ni+1))}
+   var damp=f<120?.4985:.4965;
+   for(i=Ni+2;i<n;i++){var a=y[i-Ni],b=y[i-Ni-1],c2=y[i-Ni-2];y[i]=damp*((1-fr)*(a+b)+fr*(b+c2))}
+   var pk=0;for(i=0;i<n;i++)if(Math.abs(y[i])>pk)pk=Math.abs(y[i]);
+   var fade=Math.floor(sr*.3);for(i=0;i<n;i++){y[i]/=pk;if(i>n-fade)y[i]*=(n-i)/fade}
+   return cache[key]=buf;
   }
-  var SA=146.83;
-  var strings=[string(SA*0.75,7,.9993,.6),string(SA,7,.9994,.5),string(SA,7,.9994,.45),string(SA*0.5,8,.9996,.7)];
-  var tanF=c.createBiquadFilter();tanF.type='highshelf';tanF.frequency.value=2500;tanF.gain.value=4;
-  var tanG=c.createGain();tanG.gain.value=.34;tanF.connect(tanG);tanG.connect(master);tanG.connect(verb);
-  var pans=[-.35,-.1,.1,.35],step=0,nextT=0;
-  function pluckString(k,t){var b=c.createBufferSource();b.buffer=strings[k];b.detune.value=(Math.random()-.5)*4;var g=c.createGain();g.gain.value=.8+Math.random()*.2;
-   if(c.createStereoPanner){var p=c.createStereoPanner();p.pan.value=pans[k];b.connect(g);g.connect(p);p.connect(tanF)}else{b.connect(g);g.connect(tanF)}b.start(t)}
-  // classic cycle: Pa . Sa . Sa . low Sa . (rest)
-  var pattern=[0,1,2,3],gaps=[1.15,1.15,1.15,2.3];
-  function tanpura(){var now=c.currentTime;if(nextT<now)nextT=now+.1;while(nextT<now+1.5){var k=pattern[step%4];pluckString(k,nextT);nextT+=gaps[step%4]*(.96+Math.random()*.08);step++}}
-  // ---- bansuri-style bamboo flute in raga Yaman (evening, peaceful) ----
-  var noiseB=c.createBuffer(1,sr*2,sr),nd=noiseB.getChannelData(0);for(var j=0;j<nd.length;j++)nd[j]=Math.random()*2-1;
-  var R={ni_:15/16,sa:1,re:9/8,ga:5/4,ma:45/32,pa:3/2,dha:5/3,ni:15/8,sa_:2,re_:9/4};
-  var BASE=SA*2;
-  var phrases=[
-   [['ni_',1.4],['re',1.1],['ga',3.0]],
-   [['ga',.9],['ma',.9],['pa',3.2],['ma',.7],['ga',2.4]],
-   [['pa',1.1],['dha',.9],['ni',.9],['sa_',3.4],['ni',.8],['dha',1.6],['pa',2.8]],
-   [['ga',1.1],['re',.9],['sa',3.6]],
-   [['ni_',.9],['re',.9],['ga',1.2],['ma',.9],['dha',1.1],['pa',3.2]],
-   [['sa_',1.6],['ni',.9],['re_',.9],['sa_',3.4]]
+  // wooden soundbox colour
+  var body=c.createBiquadFilter();body.type='peaking';body.frequency.value=260;body.Q.value=1.1;body.gain.value=5;
+  var body2=c.createBiquadFilter();body2.type='peaking';body2.frequency.value=1150;body2.Q.value=1.4;body2.gain.value=3;
+  var soft=c.createBiquadFilter();soft.type='lowpass';soft.frequency.value=3800;
+  var lyreOut=c.createGain();lyreOut.gain.value=.55;
+  body.connect(body2);body2.connect(soft);soft.connect(lyreOut);lyreOut.connect(master);lyreOut.connect(verb);
+  function pluck(f,t,vel,pan){var b=c.createBufferSource();b.buffer=lyreBuf(f);b.playbackRate.value=1+(Math.random()-.5)*.0012;var g=c.createGain();g.gain.value=vel;
+   if(c.createStereoPanner){var p=c.createStereoPanner();p.pan.value=pan;b.connect(g);g.connect(p);p.connect(body)}else{b.connect(g);g.connect(body)}b.start(t)}
+  // D Dorian, the mode named after the ancient Greek Dorians
+  var N={C3:130.81,D2:73.42,F2:87.31,G2:98,A2:110,C4:261.63,D3:146.83,E3:164.81,F3:174.61,G3:196,A3:220,B3:246.94,D4:293.66,E4:329.63,F4:349.23,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25};
+  var BEAT=.95;
+  // each phrase: melody [note,beats], bass [note,beat], chord for the opening arpeggio
+  var song=[
+   {m:[['A4',1],['G4',.5],['F4',.5],['E4',1],['D4',3]],b:[['D2',0],['A2',2],['D3',4]],ch:['D3','A3','D4','F4']},
+   {m:[['D4',.5],['E4',.5],['F4',1],['A4',1.5],['G4',.5],['F4',1],['E4',2]],b:[['C3',0],['G2',2],['A2',4]],ch:['C3','G3','C4','E4']},
+   {m:[['A4',1],['C5',1],['D5',1.5],['C5',.5],['A4',1],['G4',1],['A4',2]],b:[['F2',0],['C3',2],['A2',4]],ch:['F3','A3','C4','F4']},
+   {m:[['F4',1],['E4',.5],['D4',.5],['C4',1],['D4',3]],b:[['G2',0],['A2',2],['D2',3]],ch:['G3','B3','D4','G4']},
+   {m:[['D5',1],['C5',.5],['A4',.5],['B4',1],['G4',1],['A4',2]],b:[['D2',0],['A2',2],['D3',4]],ch:['D3','A3','D4','F4']},
+   {m:[['E5',.5],['D5',.5],['C5',1],['A4',1.5],['G4',.5],['E4',1],['D4',3]],b:[['C3',0],['A2',2],['D2',4]],ch:['A3','C4','E4','A4']}
   ];
-  var pi=0;
-  function flute(){
-   var ph=phrases[pi%phrases.length];pi++;
-   var t=c.currentTime+.1,total=ph.reduce(function(a,b){return a+b[1]},0);
-   var o=c.createOscillator();o.type='sine';var o2=c.createOscillator();o2.type='sine';var o3=c.createOscillator();o3.type='triangle';
-   var h2=c.createGain();h2.gain.value=.16;var h3=c.createGain();h3.gain.value=.04;
-   var vib=c.createOscillator();vib.frequency.value=5.2;var vg=c.createGain();vg.gain.value=0;vib.connect(vg);vg.connect(o.detune);vg.connect(o2.detune);vg.connect(o3.detune);
-   var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2600;
-   var env=c.createGain();env.gain.value=0;
-   o.connect(lp);o2.connect(h2);h2.connect(lp);o3.connect(h3);h3.connect(lp);lp.connect(env);
-   // breath
-   var nb=c.createBufferSource();nb.buffer=noiseB;nb.loop=true;var bp=c.createBiquadFilter();bp.type='bandpass';bp.Q.value=1.2;var bg=c.createGain();bg.gain.value=.05;nb.connect(bp);bp.connect(bg);bg.connect(env);
-   var out=c.createGain();out.gain.value=.13;env.connect(out);
-   if(c.createStereoPanner){var pn=c.createStereoPanner();pn.pan.value=.12;out.connect(pn);pn.connect(master);pn.connect(verb)}else{out.connect(master);out.connect(verb)}
-   var tt=t;ph.forEach(function(n,idx){var f=BASE*R[n[0]];
-    if(idx===0){[o,o2,o3].forEach(function(x,m){x.frequency.setValueAtTime(f*[1,2,3][m],tt)});bp.frequency.setValueAtTime(f*2,tt)}
-    else{[o,o2,o3].forEach(function(x,m){x.frequency.setTargetAtTime(f*[1,2,3][m],tt,.045)});bp.frequency.setTargetAtTime(f*2,tt,.05)}
-    // each note: soft swell, gentle vibrato blooming on longer notes
-    env.gain.setTargetAtTime(1,tt,.09);env.gain.setTargetAtTime(.82,tt+.25,.3);
-    vg.gain.setTargetAtTime(0,tt,.05);if(n[1]>1.5)vg.gain.setTargetAtTime(9,tt+.6,.4);
-    tt+=n[1]});
-   env.gain.setTargetAtTime(0,tt-.35,.35);
-   [o,o2,o3,vib,nb].forEach(function(x){x.start(t);x.stop(tt+2)});
-   return total;
+  var idx=0,nextT=0,timers=[];
+  function phrase(){
+   if(!A||!A.on)return;
+   var now=c.currentTime;if(nextT<now+.1)nextT=now+.2;
+   var p=song[idx%song.length],t0=nextT;idx++;
+   // gentle rolled chord, like a hand sweeping the strings
+   p.ch.forEach(function(n,i){pluck(N[n],t0+i*.09,.16,-.3+i*.18)});
+   p.b.forEach(function(x){pluck(N[x[0]],t0+x[1]*BEAT,.42,-.25)});
+   var tm=t0+BEAT*.5;p.m.forEach(function(x,i){var hum=(Math.random()-.5)*.03;pluck(N[x[0]],tm+hum,.5+Math.random()*.1,.18);
+     if(x[1]>=2&&Math.random()<.5)pluck(N[x[0]]*2,tm+BEAT*1.1,.12,.3);tm+=x[1]*BEAT});
+   var len=Math.max(tm-t0,6*BEAT)+BEAT*(.6+Math.random()*.6);
+   nextT=t0+len;
+   timers.push(setTimeout(phrase,Math.max(0,(nextT-c.currentTime-1.2)*1000)));
   }
-  var timers=[];
-  function startAll(){stopAll();tanpura();timers.push(setInterval(tanpura,500));
-   var loop=function(){if(!A||!A.on)return;var d=flute();timers.push(setTimeout(loop,(d+5+Math.random()*6)*1000))};timers.push(setTimeout(loop,6000))}
-  function stopAll(){timers.forEach(function(x){clearInterval(x);clearTimeout(x)});timers=[]}
+  function startAll(){stopAll();nextT=0;phrase()}
+  function stopAll(){timers.forEach(function(x){clearTimeout(x)});timers=[]}
   return {c:c,master:master,on:false,start:startAll,stop:stopAll};
  }
  function setOn(on){

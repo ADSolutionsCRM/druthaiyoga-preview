@@ -391,6 +391,27 @@ footer{padding:64px 0 28px;background:#fff;border-top:1px solid var(--mist)}
 .lbadge{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,#C6F7F2 0%,#8FEAE2 55%,#45D8CC 100%);box-shadow:inset 0 0 0 7px rgba(255,255,255,.75),0 0 0 5px #2FD3C6,0 22px 40px -16px rgba(15,46,78,.45)}
 .lbadge .bloom{width:62%}
 .bloom .pl{color:inherit}
+
+/* ===== triskelion meaning ===== */
+.meaning{background:linear-gradient(180deg,#F7F5F1 0%,#EAF8F6 50%,#F7F5F1 100%);overflow:hidden}
+.mgrid{display:flex;flex-wrap:wrap;align-items:center;gap:56px}
+.mvis{flex:1 1 340px;min-width:0;max-width:440px;margin:0 auto;position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.msym{width:72%;height:auto;aspect-ratio:475/429;fill:var(--navy);position:relative;z-index:2;filter:drop-shadow(0 18px 30px rgba(15,46,78,.18));animation:mspin 60s linear infinite}
+@keyframes mspin{to{transform:rotate(360deg)}}
+.mglow{position:absolute;width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(0,214,198,.55),rgba(0,214,198,0) 70%);z-index:1;animation:mpulse 6s ease-in-out infinite}
+.g1{left:33%;top:12%}.g2{left:12%;top:48%;animation-delay:2s}.g3{left:54%;top:48%;animation-delay:4s}
+@keyframes mpulse{0%,100%{opacity:.15;transform:scale(.8)}33%{opacity:1;transform:scale(1.15)}66%{opacity:.15;transform:scale(.8)}}
+.mlab{position:absolute;z-index:3;font-family:'Playfair Display',Georgia,serif;font-size:20px;color:var(--navy);background:rgba(255,255,255,.88);backdrop-filter:blur(6px);padding:6px 16px;border-radius:999px;box-shadow:0 10px 24px -14px rgba(15,46,78,.45)}
+.l1{top:2%;left:50%;transform:translateX(-50%)}.l2{bottom:6%;left:0}.l3{bottom:6%;right:0}
+.mtext{flex:999 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.mcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px;margin-top:56px}
+.mcard{background:#fff;border-radius:24px;padding:28px 26px;box-shadow:0 14px 34px -22px rgba(15,46,78,.4);border-top:3px solid var(--tq);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.mcard:hover{transform:translateY(-6px)}
+.mnum{font-family:'Playfair Display',Georgia,serif;font-size:15px;letter-spacing:.2em;color:var(--teal)}
+.mcard h3{margin:6px 0 8px;font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:26px}
+.mcard p{margin:0;color:var(--slate)}
+@media (max-width:700px){.mgrid{gap:30px}.mvis{max-width:300px}.mlab{font-size:16px;padding:5px 12px}.mcards{margin-top:36px;gap:14px}.mcard{padding:22px 20px}}
+@media (prefers-reduced-motion:reduce){.msym,.mglow{animation:none}}
 /* ===== floating monogram ===== */
 #mono{position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(20px) scale(.8);transition:opacity .5s,visibility .5s,transform .5s cubic-bezier(.2,.7,.2,1);text-decoration:none}
 #mono.show{opacity:1;visibility:visible;transform:none}
@@ -557,6 +578,29 @@ nav{gap:18px}
 </div>
 </section>
 
+<section class="section meaning" id="meaning">
+<div class="wrap">
+<div class="mgrid">
+<div class="mvis" aria-hidden="true">
+<div class="mglow g1"></div><div class="mglow g2"></div><div class="mglow g3"></div>
+<svg class="msym"><use href="#sp"/></svg>
+<span class="mlab l1">Mind</span><span class="mlab l2">Body</span><span class="mlab l3">Spirit</span>
+</div>
+<div class="mtext">
+<div class="eyebrow">The meaning behind the symbol</div>
+<h2>The triskelion: three spirals, one whole</h2>
+<p class="ital" style="margin:0;font-size:21px;line-height:1.5">Dru’s emblem is the triskelion, from the Greek <i>triskelḗs</i>, meaning “three-legged”.</p>
+<p style="margin:0;color:var(--slate)">Spirals like these turn up across the ancient Greek world, on pottery, coins and mosaics, where they stood for motion, cycles of life and energy flowing outward from a still centre. Three arms turn together around one point, none of them complete without the others.</p>
+<p style="margin:0;color:var(--slate)">For Dru, the three spirals are <b style="color:var(--navy)">mind, body and spirit</b>. When they move together, we feel whole. That balance is what every session works towards.</p>
+</div>
+</div>
+<div class="mcards">
+<article class="mcard"><div class="mnum">I</div><h3>Mind</h3><p>Calm, clarity and rest. Each session begins by slowing the breath and letting the mind settle.</p></article>
+<article class="mcard"><div class="mnum">II</div><h3>Body</h3><p>Release, mobility and ease. Assisted stretches and acupressure work through tension, layer by layer.</p></article>
+<article class="mcard"><div class="mnum">III</div><h3>Spirit</h3><p>Energy, balance and renewal. Working along the body’s energy lines helps restore its natural flow.</p></article>
+</div>
+</div>
+</section>
 <section class="section" id="about">
 <div class="wrap about">
 <div class="aphoto"><img decoding="async" class="ph" src="img/dru-meditation.webp" alt="Dru meditating in her treatment space" loading="lazy" style="width:100%;object-fit:cover;padding:0"><img decoding="async" class="mini" src="img/sunset-meditate.webp" alt="" loading="lazy"><div class="lotus lbadge" aria-hidden="true"><div class="bloom"><div class="bl-in"><svg class="pl l"><use href="#lt"/></svg><svg class="pl r"><use href="#lt"/></svg><svg class="pl c"><use href="#lt"/></svg></div></div></div></div>
@@ -692,7 +736,7 @@ nav{gap:18px}
 <div class="wrap fgrid">
 <div class="fcol fbrand"><div class="fb"><img decoding="async" src="img/profile.webp?v=3" alt="" width="70" height="70"><div><div class="serif" style="font-size:20px;letter-spacing:.06em">DRU THAI YOGA</div><div class="small">Traditional Thai Yoga Massage in Farnham</div></div></div>
 <p class="ital" style="margin:18px 0 0;color:var(--slate)">Deeply therapeutic bodywork, tailored to you.</p></div>
-<div class="fcol"><div class="eyebrow">Explore</div><a href="#treatments">The treatment</a><a href="#offers">Offers</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a><a href="#book">Book a session</a></div>
+<div class="fcol"><div class="eyebrow">Explore</div><a href="#treatments">The treatment</a><a href="#offers">Offers</a><a href="#meaning">The symbol</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a><a href="#book">Book a session</a></div>
 <div class="fcol"><div class="eyebrow">Contact</div><a href="tel:+447932757238">07932 757238</a><a href="mailto:druthaiyoga@gmail.com">druthaiyoga@gmail.com</a><a href="https://www.instagram.com/druthaiyoga/">Instagram · @druthaiyoga</a><span class="small" style="padding:10px 0">Farnham GU10, Surrey</span></div>
 <div class="fcol"><div class="eyebrow">Hours</div><span>Mon &amp; Tue · 09:30–14:30</span><span>Thu &amp; Fri · 09:30–14:30</span><span class="small ital">Additional hours on request</span></div>
 </div>
@@ -708,10 +752,10 @@ document.getElementById('fnote').textContent='Your email app should open with th
  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  var hdr=document.querySelector('header');
  // reveal on scroll
- var groups=[['.section .center',0],['.fcard',0],['.offer',.12],['.rev',.1],['.gallery a',.07],['.step',.1],['.hl',.06],['.atext>*',.08],['.binfo>*',.08],['.quoteband .wrap>*',.12],['.also span',.05]];
+ var groups=[['.section .center',0],['.fcard',0],['.offer',.12],['.rev',.1],['.gallery a',.07],['.step',.1],['.hl',.06],['.atext>*',.08],['.binfo>*',.08],['.quoteband .wrap>*',.12],['.also span',.05],['.mcard',.12],['.mtext>*',.08]];
  var els=[];
  groups.forEach(function(g){document.querySelectorAll(g[0]).forEach(function(el,i){el.classList.add('reveal');el.style.setProperty('--d',(Math.min(i,6)*g[1])+'s');els.push(el)})});
- document.querySelectorAll('.aphoto,.profile,#enq').forEach(function(el){el.classList.add('reveal','zoom');els.push(el)});
+ document.querySelectorAll('.aphoto,.profile,#enq,.mvis').forEach(function(el){el.classList.add('reveal','zoom');els.push(el)});
  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')})}
  else{var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});els.forEach(function(e){io.observe(e)})}
  // parallax layers

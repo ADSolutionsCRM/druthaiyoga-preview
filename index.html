@@ -471,6 +471,9 @@ nav{gap:18px}
  .book{padding-top:80px}
  #mono{width:48px;height:48px;right:12px;bottom:12px}#mono svg{width:30px}
 }
+/* home-screen app (iOS/Android standalone): keep the WhatsApp button clear of the rounded screen edges and home bar */
+@media (display-mode: standalone){#mono{right:calc(22px + env(safe-area-inset-right));bottom:calc(30px + env(safe-area-inset-bottom))}}
+@supports (-webkit-touch-callout:none){html.ios-app #mono{right:calc(22px + env(safe-area-inset-right));bottom:calc(30px + env(safe-area-inset-bottom))}}
 @media (max-width:520px){.bk-long{display:none}header nav .pill{padding:11px 20px}}
 @media (prefers-reduced-motion:reduce){#intro .bsym,#intro .ring{animation:none!important}}
 @media (prefers-reduced-motion:reduce){
@@ -908,6 +911,7 @@ document.getElementById('fnote').textContent='Your email app should open with th
 </script>
 
 <script>
+if(window.navigator.standalone)document.documentElement.classList.add('ios-app');
 (function(){
  var m=document.getElementById('mono'),s=m.querySelector('svg'),logo=document.querySelector('.brand img');
  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;

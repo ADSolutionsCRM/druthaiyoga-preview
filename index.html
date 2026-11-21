@@ -797,15 +797,15 @@ document.getElementById('fnote').textContent='Your email app should open with th
   // warm hall reverb
   var len=sr*5.5,ir=c.createBuffer(2,len,sr);
   for(var ch=0;ch<2;ch++){var d=ir.getChannelData(ch);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2)}
-  var verb=c.createConvolver();verb.buffer=ir;var wet=c.createGain();wet.gain.value=.42;verb.connect(wet);wet.connect(master);
+  var verb=c.createConvolver();verb.buffer=ir;var wet=c.createGain();wet.gain.value=.6;verb.connect(wet);wet.connect(master);
   // ---- ancient Greek lyre (kithara): plucked gut strings modelled acoustically ----
   var cache={};
   function lyreBuf(f){
    var key=Math.round(f*10);if(cache[key])return cache[key];
-   var secs=f<120?5:3.4,n=Math.floor(sr*secs),buf=c.createBuffer(1,n,sr),y=buf.getChannelData(0),N=sr/f,Ni=Math.floor(N),fr=N-Ni,i;
+   var secs=f<120?6:4.8,n=Math.floor(sr*secs),buf=c.createBuffer(1,n,sr),y=buf.getChannelData(0),N=sr/f,Ni=Math.floor(N),fr=N-Ni,i;
    // soft, finger-plucked excitation (smoothed noise, plucked near the middle)
-   var prev=0;for(i=0;i<=Ni+1;i++){var r=Math.random()*2-1;prev=prev*.55+r*.45;y[i]=prev*Math.sin(Math.PI*i/(Ni+1))}
-   var damp=f<120?.4985:.4965;
+   var prev=0,prev2=0;for(i=0;i<=Ni+1;i++){var r=Math.random()*2-1;prev=prev*.78+r*.22;prev2=prev2*.6+prev*.4;y[i]=prev2*Math.sin(Math.PI*i/(Ni+1))}
+   var damp=f<120?.4992:.4985;
    for(i=Ni+2;i<n;i++){var a=y[i-Ni],b=y[i-Ni-1],c2=y[i-Ni-2];y[i]=damp*((1-fr)*(a+b)+fr*(b+c2))}
    var pk=0;for(i=0;i<n;i++)if(Math.abs(y[i])>pk)pk=Math.abs(y[i]);
    var fade=Math.floor(sr*.3);for(i=0;i<n;i++){y[i]/=pk;if(i>n-fade)y[i]*=(n-i)/fade}
@@ -813,15 +813,15 @@ document.getElementById('fnote').textContent='Your email app should open with th
   }
   // wooden soundbox colour
   var body=c.createBiquadFilter();body.type='peaking';body.frequency.value=260;body.Q.value=1.1;body.gain.value=5;
-  var body2=c.createBiquadFilter();body2.type='peaking';body2.frequency.value=1150;body2.Q.value=1.4;body2.gain.value=3;
-  var soft=c.createBiquadFilter();soft.type='lowpass';soft.frequency.value=3800;
-  var lyreOut=c.createGain();lyreOut.gain.value=.55;
+  var body2=c.createBiquadFilter();body2.type='peaking';body2.frequency.value=1150;body2.Q.value=1.4;body2.gain.value=0;
+  var soft=c.createBiquadFilter();soft.type='lowpass';soft.frequency.value=1900;soft.Q.value=.5;
+  var lyreOut=c.createGain();lyreOut.gain.value=.7;
   body.connect(body2);body2.connect(soft);soft.connect(lyreOut);lyreOut.connect(master);lyreOut.connect(verb);
-  function pluck(f,t,vel,pan){var b=c.createBufferSource();b.buffer=lyreBuf(f);b.playbackRate.value=1+(Math.random()-.5)*.0012;var g=c.createGain();g.gain.value=vel;
+  function pluck(f,t,vel,pan){var b=c.createBufferSource();b.buffer=lyreBuf(f);b.playbackRate.value=1+(Math.random()-.5)*.0012;var g=c.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vel,t+.035);
    if(c.createStereoPanner){var p=c.createStereoPanner();p.pan.value=pan;b.connect(g);g.connect(p);p.connect(body)}else{b.connect(g);g.connect(body)}b.start(t)}
   // D Dorian, the mode named after the ancient Greek Dorians
   var N={C3:130.81,D2:73.42,F2:87.31,G2:98,A2:110,C4:261.63,D3:146.83,E3:164.81,F3:174.61,G3:196,A3:220,B3:246.94,D4:293.66,E4:329.63,F4:349.23,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25};
-  var BEAT=.95;
+  var BEAT=1.2;
   // each phrase: melody [note,beats], bass [note,beat], chord for the opening arpeggio
   var song=[
    {m:[['A4',1],['G4',.5],['F4',.5],['E4',1],['D4',3]],b:[['D2',0],['A2',2],['D3',4]],ch:['D3','A3','D4','F4']},
@@ -837,10 +837,9 @@ document.getElementById('fnote').textContent='Your email app should open with th
    var now=c.currentTime;if(nextT<now+.1)nextT=now+.2;
    var p=song[idx%song.length],t0=nextT;idx++;
    // gentle rolled chord, like a hand sweeping the strings
-   p.ch.forEach(function(n,i){pluck(N[n],t0+i*.09,.16,-.3+i*.18)});
-   p.b.forEach(function(x){pluck(N[x[0]],t0+x[1]*BEAT,.42,-.25)});
-   var tm=t0+BEAT*.5;p.m.forEach(function(x,i){var hum=(Math.random()-.5)*.03;pluck(N[x[0]],tm+hum,.5+Math.random()*.1,.18);
-     if(x[1]>=2&&Math.random()<.5)pluck(N[x[0]]*2,tm+BEAT*1.1,.12,.3);tm+=x[1]*BEAT});
+   p.b.forEach(function(x,i){if(i<2)pluck(N[x[0]],t0+x[1]*BEAT,.24,-.2)});
+   var tm=t0+BEAT*.5;p.m.forEach(function(x,i){var hum=(Math.random()-.5)*.03;pluck(N[x[0]],tm+hum,.38+Math.random()*.06,.12);
+     if(x[1]>=2&&Math.random()<.35)pluck(N[x[0]]*2,tm+BEAT*1.2,.07,.25);tm+=x[1]*BEAT});
    var len=Math.max(tm-t0,6*BEAT)+BEAT*(.6+Math.random()*.6);
    nextT=t0+len;
    timers.push(setTimeout(phrase,Math.max(0,(nextT-c.currentTime-1.2)*1000)));

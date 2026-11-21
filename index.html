@@ -273,9 +273,9 @@ header.scrolled{background:rgba(247,245,241,.96);box-shadow:0 8px 30px -12px rgb
  .swipe{display:block!important}
  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
  .gallery a{border-radius:18px}
- .hls{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin:30px -24px 0;padding:6px 24px 16px;gap:16px;scrollbar-width:none}
+ .hls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 10px;margin:28px 0 0;padding:0;justify-items:center}
  .hls::-webkit-scrollbar{display:none}
- .hl{flex:0 0 92px}.hl img{width:84px}
+ .hl{width:100%;max-width:110px}.hl img{width:78px}.hl span{font-size:14.5px}
  .fphoto img{height:clamp(360px,110vw,520px)}
  .quoteband{min-height:0;display:block;background-size:190% auto!important;background-position:50% 0!important;background-repeat:no-repeat;padding:calc(100vw * 0.78) 0 56px}
  .quoteband::before{background:linear-gradient(180deg,rgba(15,46,78,0) 0,rgba(15,46,78,0) calc(100vw * 0.45),#0F2E4E calc(100vw * 0.8))}
@@ -430,7 +430,13 @@ html.intro-open .hcopy>*,html.intro-open .hphoto,html.intro-open .hphoto .frame 
 @keyframes eq{0%,100%{height:5px}50%{height:16px}}
 nav{gap:18px}
 @media (max-width:700px){header nav{flex-wrap:nowrap}header #snd{width:40px;height:40px}}
-@media (max-width:420px){.bk-long{display:none}header nav .pill{padding:11px 18px}}
+
+@media (max-width:700px){
+ #insta{padding-bottom:36px}
+ .book{padding-top:80px}
+ #mono{width:48px;height:48px;right:12px;bottom:12px}#mono svg{width:30px}
+}
+@media (max-width:520px){.bk-long{display:none}header nav .pill{padding:11px 20px}}
 @media (prefers-reduced-motion:reduce){#intro .bsym,#intro .ring{animation:none!important}}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation:none!important;transition:none!important}
@@ -586,7 +592,7 @@ nav{gap:18px}
 </div>
 </section>
 
-<section class="section" style="padding-top:20px">
+<section class="section" id="insta" style="padding-top:20px">
 <div class="wrap center">
 <img decoding="async" class="profile" src="img/profile.webp?v=3" alt="Dru Thai Yoga Instagram profile picture">
 <div class="eyebrow" style="margin-top:10px">Follow along on Instagram</div>

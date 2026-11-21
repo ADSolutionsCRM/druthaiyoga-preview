@@ -478,7 +478,7 @@ nav{gap:18px}
 <button class="pill frost" id="enterSound" type="button">Enter with sound <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
 <button class="quiet" id="enterQuiet" type="button">Enter quietly</button>
 </div>
-<div class="hp">Ancient Greek lyre, in the Dorian mode · best with headphones</div>
+<div class="hp">Relaxing music · best with headphones</div>
 </div>
 </div>
 <a id="mono" href="#top" aria-label="Back to top"><span class="fl"><svg aria-hidden="true"><use href="#sp"/></svg></span><span class="tip">Back to top</span></a>
@@ -782,7 +782,7 @@ document.getElementById('fnote').textContent='Your email app should open with th
  // ---- music engine ----
  // To use a real recording instead, add the file to the site (e.g. audio/ambience.mp3)
  // and set MUSIC_FILE below. Otherwise a live lyre melody (D Dorian) is played.
- var MUSIC_FILE = "";
+ var MUSIC_FILE = "audio/ambience.m4a";
  var A=null;
  function build(){
   var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://druthaiyoga.co.uk/sitemap.xml

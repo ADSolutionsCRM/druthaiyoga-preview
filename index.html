@@ -478,7 +478,7 @@ nav{gap:18px}
 <button class="pill frost" id="enterSound" type="button">Enter with sound <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
 <button class="quiet" id="enterQuiet" type="button">Enter quietly</button>
 </div>
-<div class="hp">Soft ocean &amp; kalimba ambience · best with headphones</div>
+<div class="hp">Tanpura &amp; bamboo flute · best with headphones</div>
 </div>
 </div>
 <a id="mono" href="#top" aria-label="Back to top"><span class="fl"><svg aria-hidden="true"><use href="#sp"/></svg></span><span class="tip">Back to top</span></a>
@@ -779,61 +779,95 @@ document.getElementById('fnote').textContent='Your email app should open with th
 (function(){
  var html=document.documentElement,intro=document.getElementById('intro'),btn=document.getElementById('snd'),cue=document.getElementById('cue');
  var seen=false;try{seen=sessionStorage.getItem('dty-intro')==='1'}catch(e){}
- // ---- ambient engine (all sound generated live, no audio files) ----
+ // ---- music engine ----
+ // To use a real recording instead, add the file to the site (e.g. audio/ambience.mp3)
+ // and set MUSIC_FILE below. Otherwise a live tanpura + bansuri-style flute is played.
+ var MUSIC_FILE = "";
  var A=null;
  function build(){
   var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
-  var c=new AC(),master=c.createGain();master.gain.value=0;
-  var comp=c.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=3;
+  var c=new AC(),sr=c.sampleRate,master=c.createGain();master.gain.value=0;
+  var comp=c.createDynamicsCompressor();comp.threshold.value=-20;comp.ratio.value=3;comp.attack.value=.02;
   master.connect(comp);comp.connect(c.destination);
-  // reverb
-  var len=c.sampleRate*4.5,ir=c.createBuffer(2,len,c.sampleRate);
-  for(var ch=0;ch<2;ch++){var d=ir.getChannelData(ch);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6)}
-  var verb=c.createConvolver();verb.buffer=ir;var wet=c.createGain();wet.gain.value=.4;verb.connect(wet);wet.connect(master);
-  // warm pad: D sus2 drone with slow breathing swell
-  var padF=c.createBiquadFilter();padF.type='lowpass';padF.frequency.value=1400;padF.Q.value=.4;
-  var pad=c.createGain();pad.gain.value=.0;padF.connect(pad);pad.connect(master);pad.connect(verb);
-  [146.83,185,220,277.18,329.63].forEach(function(f,i){
-   [-5,5].forEach(function(det){var o=c.createOscillator();o.type='sine';o.frequency.value=f;o.detune.value=det;var g=c.createGain();g.gain.value=[.16,.12,.12,.06,.07][i];o.connect(g);g.connect(padF);o.start()})
-  });
-  var lfo=c.createOscillator();lfo.frequency.value=1/16;var lg=c.createGain();lg.gain.value=.035;lfo.connect(lg);lg.connect(pad.gain);lfo.start();
-  pad.gain.setTargetAtTime(.09,c.currentTime,3);
-  var lfo2=c.createOscillator();lfo2.frequency.value=1/23;var lg2=c.createGain();lg2.gain.value=260;lfo2.connect(lg2);lg2.connect(padF.frequency);lfo2.start();
-  // ocean: filtered noise swelling like slow waves
-  var nb=c.createBuffer(2,c.sampleRate*6,c.sampleRate);
-  for(var ch2=0;ch2<2;ch2++){var nd=nb.getChannelData(ch2),last=0;for(var j=0;j<nd.length;j++){var w=Math.random()*2-1;last=(last+.02*w)/1.02;nd[j]=last*3.5}}
-  var ns=c.createBufferSource();ns.buffer=nb;ns.loop=true;
-  var wf=c.createBiquadFilter();wf.type='lowpass';wf.frequency.value=600;
-  var wg=c.createGain();wg.gain.value=.18;ns.connect(wf);wf.connect(wg);wg.connect(master);ns.start();
-  var wl=c.createOscillator();wl.frequency.value=1/9;var wlg=c.createGain();wlg.gain.value=.15;wl.connect(wlg);wlg.connect(wg.gain);wl.start();
-  var wl2=c.createOscillator();wl2.frequency.value=1/9;var wlg2=c.createGain();wlg2.gain.value=380;wl2.connect(wlg2);wlg2.connect(wf.frequency);wl2.start();
-  // light kalimba-style melodies (major pentatonic, bright and airy)
-  var scale=[587.33,659.25,739.99,880,987.77,1174.66,1318.51];
-  function pluck(f,t0,vel,pan){
-   var out=c.createGain();out.gain.setValueAtTime(.0001,t0);out.gain.exponentialRampToValueAtTime(vel,t0+.008);out.gain.exponentialRampToValueAtTime(.0001,t0+1.9);
-   var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;
-   [[1,'sine',1],[2,'sine',.18],[3.01,'triangle',.05]].forEach(function(h){var o=c.createOscillator();o.type=h[1];o.frequency.value=f*h[0];var g=c.createGain();g.gain.value=h[2];o.connect(g);g.connect(lp);o.start(t0);o.stop(t0+2)});
-   lp.connect(out);
-   var dry=c.createGain();dry.gain.value=.8;var sw=c.createGain();sw.gain.value=.35;
-   if(c.createStereoPanner){var p=c.createStereoPanner();p.pan.value=pan;out.connect(p);p.connect(dry);p.connect(sw)}else{out.connect(dry);out.connect(sw)}
-   dry.connect(master);sw.connect(verb);
+  if(MUSIC_FILE){
+   var au=new Audio(MUSIC_FILE);au.loop=true;au.crossOrigin='anonymous';
+   var src=c.createMediaElementSource(au);src.connect(master);
+   return {c:c,master:master,on:false,start:function(){au.play().catch(function(){})},stop:function(){setTimeout(function(){if(!A.on)au.pause()},1500)}};
   }
-  var shapes=[[0,2,4,2],[1,2,4,5],[4,2,1,0],[0,1,2,4,6],[2,4,5,4],[3,2,0]];
-  function bowl(){
-   if(!A||!A.on)return;
-   var s=shapes[Math.floor(Math.random()*shapes.length)],t0=c.currentTime+.05,pan=Math.random()*1.0-.5,gap=.26+Math.random()*.12;
-   s.forEach(function(n,i){pluck(scale[n],t0+i*gap+(Math.random()*.03),.07+Math.random()*.03,pan+(i-s.length/2)*.08)});
-   A.timer=setTimeout(bowl,5500+Math.random()*5000);
+  // warm hall reverb
+  var len=sr*5.5,ir=c.createBuffer(2,len,sr);
+  for(var ch=0;ch<2;ch++){var d=ir.getChannelData(ch);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2)}
+  var verb=c.createConvolver();verb.buffer=ir;var wet=c.createGain();wet.gain.value=.5;verb.connect(wet);wet.connect(master);
+  // ---- tanpura: plucked strings (Karplus-Strong) with jawari buzz ----
+  function string(f,secs,decay,bright){
+   var n=Math.floor(sr*secs),buf=c.createBuffer(1,n,sr),y=buf.getChannelData(0),N=Math.round(sr/f),i;
+   for(i=0;i<N;i++)y[i]=(Math.random()*2-1)*(i<N*bright?1:.35);
+   for(i=N+1;i<n;i++){var v=decay*.5*(y[i-N]+y[i-N-1]);y[i]=v}
+   // jawari: gentle asymmetric saturation adds the shimmering buzz
+   var peak=0;for(i=0;i<n;i++){var x=y[i];y[i]=Math.tanh(x*2.2+.18*x*x);if(Math.abs(y[i])>peak)peak=Math.abs(y[i])}
+   for(i=0;i<n;i++)y[i]=y[i]/peak*(1-Math.min(1,i/n))*1;
+   return buf;
   }
-  return {c:c,master:master,on:false,bowl:bowl,timer:null};
+  var SA=146.83;
+  var strings=[string(SA*0.75,7,.9993,.6),string(SA,7,.9994,.5),string(SA,7,.9994,.45),string(SA*0.5,8,.9996,.7)];
+  var tanF=c.createBiquadFilter();tanF.type='highshelf';tanF.frequency.value=2500;tanF.gain.value=4;
+  var tanG=c.createGain();tanG.gain.value=.34;tanF.connect(tanG);tanG.connect(master);tanG.connect(verb);
+  var pans=[-.35,-.1,.1,.35],step=0,nextT=0;
+  function pluckString(k,t){var b=c.createBufferSource();b.buffer=strings[k];b.detune.value=(Math.random()-.5)*4;var g=c.createGain();g.gain.value=.8+Math.random()*.2;
+   if(c.createStereoPanner){var p=c.createStereoPanner();p.pan.value=pans[k];b.connect(g);g.connect(p);p.connect(tanF)}else{b.connect(g);g.connect(tanF)}b.start(t)}
+  // classic cycle: Pa . Sa . Sa . low Sa . (rest)
+  var pattern=[0,1,2,3],gaps=[1.15,1.15,1.15,2.3];
+  function tanpura(){var now=c.currentTime;if(nextT<now)nextT=now+.1;while(nextT<now+1.5){var k=pattern[step%4];pluckString(k,nextT);nextT+=gaps[step%4]*(.96+Math.random()*.08);step++}}
+  // ---- bansuri-style bamboo flute in raga Yaman (evening, peaceful) ----
+  var noiseB=c.createBuffer(1,sr*2,sr),nd=noiseB.getChannelData(0);for(var j=0;j<nd.length;j++)nd[j]=Math.random()*2-1;
+  var R={ni_:15/16,sa:1,re:9/8,ga:5/4,ma:45/32,pa:3/2,dha:5/3,ni:15/8,sa_:2,re_:9/4};
+  var BASE=SA*2;
+  var phrases=[
+   [['ni_',1.4],['re',1.1],['ga',3.0]],
+   [['ga',.9],['ma',.9],['pa',3.2],['ma',.7],['ga',2.4]],
+   [['pa',1.1],['dha',.9],['ni',.9],['sa_',3.4],['ni',.8],['dha',1.6],['pa',2.8]],
+   [['ga',1.1],['re',.9],['sa',3.6]],
+   [['ni_',.9],['re',.9],['ga',1.2],['ma',.9],['dha',1.1],['pa',3.2]],
+   [['sa_',1.6],['ni',.9],['re_',.9],['sa_',3.4]]
+  ];
+  var pi=0;
+  function flute(){
+   var ph=phrases[pi%phrases.length];pi++;
+   var t=c.currentTime+.1,total=ph.reduce(function(a,b){return a+b[1]},0);
+   var o=c.createOscillator();o.type='sine';var o2=c.createOscillator();o2.type='sine';var o3=c.createOscillator();o3.type='triangle';
+   var h2=c.createGain();h2.gain.value=.16;var h3=c.createGain();h3.gain.value=.04;
+   var vib=c.createOscillator();vib.frequency.value=5.2;var vg=c.createGain();vg.gain.value=0;vib.connect(vg);vg.connect(o.detune);vg.connect(o2.detune);vg.connect(o3.detune);
+   var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2600;
+   var env=c.createGain();env.gain.value=0;
+   o.connect(lp);o2.connect(h2);h2.connect(lp);o3.connect(h3);h3.connect(lp);lp.connect(env);
+   // breath
+   var nb=c.createBufferSource();nb.buffer=noiseB;nb.loop=true;var bp=c.createBiquadFilter();bp.type='bandpass';bp.Q.value=1.2;var bg=c.createGain();bg.gain.value=.05;nb.connect(bp);bp.connect(bg);bg.connect(env);
+   var out=c.createGain();out.gain.value=.13;env.connect(out);
+   if(c.createStereoPanner){var pn=c.createStereoPanner();pn.pan.value=.12;out.connect(pn);pn.connect(master);pn.connect(verb)}else{out.connect(master);out.connect(verb)}
+   var tt=t;ph.forEach(function(n,idx){var f=BASE*R[n[0]];
+    if(idx===0){[o,o2,o3].forEach(function(x,m){x.frequency.setValueAtTime(f*[1,2,3][m],tt)});bp.frequency.setValueAtTime(f*2,tt)}
+    else{[o,o2,o3].forEach(function(x,m){x.frequency.setTargetAtTime(f*[1,2,3][m],tt,.045)});bp.frequency.setTargetAtTime(f*2,tt,.05)}
+    // each note: soft swell, gentle vibrato blooming on longer notes
+    env.gain.setTargetAtTime(1,tt,.09);env.gain.setTargetAtTime(.82,tt+.25,.3);
+    vg.gain.setTargetAtTime(0,tt,.05);if(n[1]>1.5)vg.gain.setTargetAtTime(9,tt+.6,.4);
+    tt+=n[1]});
+   env.gain.setTargetAtTime(0,tt-.35,.35);
+   [o,o2,o3,vib,nb].forEach(function(x){x.start(t);x.stop(tt+2)});
+   return total;
+  }
+  var timers=[];
+  function startAll(){stopAll();tanpura();timers.push(setInterval(tanpura,500));
+   var loop=function(){if(!A||!A.on)return;var d=flute();timers.push(setTimeout(loop,(d+5+Math.random()*6)*1000))};timers.push(setTimeout(loop,6000))}
+  function stopAll(){timers.forEach(function(x){clearInterval(x);clearTimeout(x)});timers=[]}
+  return {c:c,master:master,on:false,start:startAll,stop:stopAll};
  }
  function setOn(on){
   if(on&&!A){A=build();if(!A)return}
   if(!A)return;
   A.on=on;var c=A.c;
-  if(on){c.resume();A.master.gain.cancelScheduledValues(c.currentTime);A.master.gain.setTargetAtTime(.55,c.currentTime,1.6);clearTimeout(A.timer);A.timer=setTimeout(A.bowl,1800)}
-  else{A.master.gain.cancelScheduledValues(c.currentTime);A.master.gain.setTargetAtTime(0,c.currentTime,.5);clearTimeout(A.timer);setTimeout(function(){if(A&&!A.on)c.suspend()},1600)}
-  btn.classList.toggle('on',on);btn.setAttribute('aria-pressed',on);btn.setAttribute('aria-label',on?'Turn relaxing sound off':'Turn relaxing sound on');
+  if(on){c.resume();A.master.gain.cancelScheduledValues(c.currentTime);A.master.gain.setTargetAtTime(.6,c.currentTime,2);A.start()}
+  else{A.master.gain.cancelScheduledValues(c.currentTime);A.master.gain.setTargetAtTime(0,c.currentTime,.5);A.stop();setTimeout(function(){if(A&&!A.on)c.suspend()},1600)}
+  btn.classList.toggle('on',on);btn.setAttribute('aria-pressed',on);btn.setAttribute('aria-label',on?'Turn relaxing music off':'Turn relaxing music on');
  }
  btn.addEventListener('click',function(){setOn(!(A&&A.on))});
  document.addEventListener('visibilitychange',function(){if(!A)return;if(document.hidden){A.c.suspend()}else if(A.on){A.c.resume()}});

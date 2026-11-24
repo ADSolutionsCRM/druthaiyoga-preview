@@ -213,6 +213,18 @@ header .wrap{flex-wrap:nowrap}
 .hphoto .frame img{animation:zoomin 2.4s cubic-bezier(.2,.7,.2,1) both}
 .hphoto .chip{animation:floaty 6s 1s ease-in-out infinite}
 .offer .amt{animation:shimmer 3.2s ease-in-out infinite}
+@media (max-width:1060px){nav a.nav-space{display:none}}
+@media (max-width:640px){.sp-hero img{aspect-ratio:4/3;object-fit:cover;object-position:62% 50%}}
+.space{background:linear-gradient(180deg,#fff, #FBF6EE)}
+.sp-hero{margin:44px 0 0;border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(80,40,10,.45)}
+.sp-hero img,.sp-grid img{display:block;width:100%;height:auto;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.sp-hero:hover img,.sp-grid figure:hover img{transform:scale(1.03)}
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:22px;margin-top:22px}
+.sp-grid figure{margin:0;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 20px 44px -26px rgba(80,40,10,.4);display:flex;flex-direction:column}
+.sp-grid figure img{aspect-ratio:16/10;object-fit:cover}
+.sp-grid figcaption{padding:14px 18px 16px;font-family:Lora,Georgia,serif;font-style:italic;color:var(--slate);font-size:16px;text-align:center}
+.sp-points{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:26px 0 0;padding:0}
+.sp-points li{padding:9px 16px;border-radius:999px;background:#E3F7F5;color:var(--teal,#00756D);font-weight:600;font-size:14px;letter-spacing:.04em}
 .faqs{margin-top:28px;display:grid;gap:12px}
 .faq{background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(10,40,70,.07);padding:0 22px}
 .faq summary{cursor:pointer;list-style:none;padding:18px 28px 18px 0;font-weight:600;position:relative}
@@ -508,7 +520,7 @@ nav{gap:18px}
 <div class="wrap">
 <a class="brand" href="#top"><img decoding="async" src="img/symbol.webp" alt=""><span>DRU THAI YOGA</span></a>
 <nav aria-label="Main">
-<a href="#treatments">Treatments</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a>
+<a href="#treatments">Treatments</a><a href="#space" class="nav-space">The Space</a><a href="#about">About Dru</a><a href="#reviews">Reviews</a>
 <button id="snd" type="button" aria-label="Turn relaxing sound on" aria-pressed="false" title="Relaxing sound"><span></span><span></span><span></span><span></span></button>
 <a class="pill navy" href="#book">Book<span class="bk-long"> a session</span></a>
 </nav>
@@ -595,6 +607,18 @@ nav{gap:18px}
 
 </div>
 </div>
+</div>
+</section>
+
+<section class="section space" id="space">
+<div class="wrap">
+<div class="center reveal"><div class="eyebrow">The space</div><h2>Your treatment room</h2><p class="ital" style="margin:0;font-size:20px;color:var(--slate)">A warm, wood-lined sanctuary in Farnham, made for slowing down.</p></div>
+<figure class="sp-hero reveal"><img decoding="async" loading="lazy" src="img/space-wide-1600.webp" srcset="img/space-wide-800.webp 800w, img/space-wide-1600.webp 1600w" sizes="(max-width:1180px) 100vw, 1120px" width="1600" height="686" alt="Dru Thai Yoga treatment room: warm wooden walls, a large mandala floor mat, a teal bolster, a Buddha statue and a macramé dream catcher"></figure>
+<div class="sp-grid">
+<figure class="reveal"><img decoding="async" loading="lazy" src="img/space-room-1600.webp" srcset="img/space-room-800.webp 800w, img/space-room-1600.webp 1600w" sizes="(max-width:760px) 100vw, 560px" width="1600" height="900" alt="The treatment room with soft lighting, the Dru Thai Yoga sign and the massage mat"><figcaption>Soft light, natural wood and calm, unhurried quiet</figcaption></figure>
+<figure class="reveal"><img decoding="async" loading="lazy" src="img/space-mat-1448.webp" srcset="img/space-mat-800.webp 800w, img/space-mat-1448.webp 1448w" sizes="(max-width:760px) 100vw, 560px" width="1448" height="1086" alt="The large cushioned Thai massage floor mat with a bolster and Buddha statue"><figcaption>A deep, cushioned floor mat for traditional Thai massage</figcaption></figure>
+</div>
+<ul class="sp-points reveal"><li>Private &amp; peaceful</li><li>Cosy &amp; warm</li><li>Fully clothed, on a traditional floor mat</li></ul>
 </div>
 </section>
 

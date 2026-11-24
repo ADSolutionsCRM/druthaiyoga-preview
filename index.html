@@ -612,13 +612,13 @@ nav{gap:18px}
 
 <section class="section space" id="space">
 <div class="wrap">
-<div class="center reveal"><div class="eyebrow">The space</div><h2>Your treatment room</h2><p class="ital" style="margin:0;font-size:20px;color:var(--slate)">A warm, wood-lined sanctuary in Farnham, made for slowing down.</p></div>
-<figure class="sp-hero reveal"><img decoding="async" loading="lazy" src="img/space-wide-1600.webp" srcset="img/space-wide-800.webp 800w, img/space-wide-1600.webp 1600w" sizes="(max-width:1180px) 100vw, 1120px" width="1600" height="686" alt="Dru Thai Yoga treatment room: warm wooden walls, a large mandala floor mat, a teal bolster, a Buddha statue and a macramé dream catcher"></figure>
+<div class="center"><div class="eyebrow">The space</div><h2>Your treatment room</h2><p class="ital" style="margin:0;font-size:20px;color:var(--slate)">A warm, wood-lined sanctuary in Farnham, made for slowing down.</p></div>
+<figure class="sp-hero"><img decoding="async" loading="lazy" src="img/space-wide-1600.webp" srcset="img/space-wide-800.webp 800w, img/space-wide-1600.webp 1600w" sizes="(max-width:1180px) 100vw, 1120px" width="1600" height="686" alt="Dru Thai Yoga treatment room: warm wooden walls, a large mandala floor mat, a teal bolster, a Buddha statue and a macramé dream catcher"></figure>
 <div class="sp-grid">
-<figure class="reveal"><img decoding="async" loading="lazy" src="img/space-room-1600.webp" srcset="img/space-room-800.webp 800w, img/space-room-1600.webp 1600w" sizes="(max-width:760px) 100vw, 560px" width="1600" height="900" alt="The treatment room with soft lighting, the Dru Thai Yoga sign and the massage mat"><figcaption>Soft light, natural wood and calm, unhurried quiet</figcaption></figure>
-<figure class="reveal"><img decoding="async" loading="lazy" src="img/space-mat-1448.webp" srcset="img/space-mat-800.webp 800w, img/space-mat-1448.webp 1448w" sizes="(max-width:760px) 100vw, 560px" width="1448" height="1086" alt="The large cushioned Thai massage floor mat with a bolster and Buddha statue"><figcaption>A deep, cushioned floor mat for traditional Thai massage</figcaption></figure>
+<figure><img decoding="async" loading="lazy" src="img/space-room-1600.webp" srcset="img/space-room-800.webp 800w, img/space-room-1600.webp 1600w" sizes="(max-width:760px) 100vw, 560px" width="1600" height="900" alt="The treatment room with soft lighting, the Dru Thai Yoga sign and the massage mat"><figcaption>Soft light, natural wood and calm, unhurried quiet</figcaption></figure>
+<figure><img decoding="async" loading="lazy" src="img/space-mat-1448.webp" srcset="img/space-mat-800.webp 800w, img/space-mat-1448.webp 1448w" sizes="(max-width:760px) 100vw, 560px" width="1448" height="1086" alt="The large cushioned Thai massage floor mat with a bolster and Buddha statue"><figcaption>A deep, cushioned floor mat for traditional Thai massage</figcaption></figure>
 </div>
-<ul class="sp-points reveal"><li>Private &amp; peaceful</li><li>Cosy &amp; warm</li><li>Fully clothed, on a traditional floor mat</li></ul>
+<ul class="sp-points"><li>Private &amp; peaceful</li><li>Cosy &amp; warm</li><li>Fully clothed, on a traditional floor mat</li></ul>
 </div>
 </section>
 
@@ -810,7 +810,7 @@ document.getElementById('fnote').textContent='Your email app should open with th
  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  var hdr=document.querySelector('header');
  // reveal on scroll
- var groups=[['.section .center',0],['.fcard',0],['.offer',.12],['.rev',.1],['.gallery a',.07],['.step',.1],['.hl',.06],['.atext>*',.08],['.binfo>*',.08],['.quoteband .wrap>*',.12],['.also span',.05],['.mcard',.12],['.mtext>*',.08]];
+ var groups=[['.section .center',0],['.fcard',0],['.offer',.12],['.rev',.1],['.gallery a',.07],['.step',.1],['.hl',.06],['.atext>*',.08],['.binfo>*',.08],['.quoteband .wrap>*',.12],['.also span',.05],['.mcard',.12],['.mtext>*',.08],['.sp-hero',0],['.sp-grid figure',.12],['.sp-points',0]];
  var els=[];
  groups.forEach(function(g){document.querySelectorAll(g[0]).forEach(function(el,i){el.classList.add('reveal');el.style.setProperty('--d',(Math.min(i,6)*g[1])+'s');els.push(el)})});
  document.querySelectorAll('.aphoto,.profile,#enq,.mvis').forEach(function(el){el.classList.add('reveal','zoom');els.push(el)});

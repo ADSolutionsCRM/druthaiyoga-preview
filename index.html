@@ -223,6 +223,14 @@ header .wrap{flex-wrap:nowrap}
 .sp-grid figure{margin:0;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 20px 44px -26px rgba(80,40,10,.4);display:flex;flex-direction:column}
 .sp-grid figure img{aspect-ratio:16/10;object-fit:cover}
 .sp-grid figcaption{padding:14px 18px 16px;font-family:Lora,Georgia,serif;font-style:italic;color:var(--slate);font-size:16px;text-align:center}
+.sp-tour{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:40px;margin-top:56px}
+.sp-phone{flex:0 0 auto;width:min(300px,78vw);aspect-ratio:9/16;border-radius:34px;overflow:hidden;background:#2a1a0e;border:7px solid #0F2E4E;box-shadow:0 34px 70px -30px rgba(80,40,10,.6)}
+.sp-phone video{width:100%;height:100%;object-fit:cover;display:block}
+.sp-ttext{flex:1 1 320px;max-width:460px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.sp-ttext h3{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,34px);margin:0;color:var(--navy)}
+.sp-ttext p{margin:0;color:var(--slate);line-height:1.65}
+.sp-ttext .sp-points{justify-content:flex-start;margin:4px 0 8px}
+@media (max-width:700px){.sp-ttext{align-items:center;text-align:center}.sp-ttext .eyebrow{justify-content:center!important}.sp-ttext .sp-points{justify-content:center}}
 .sp-points{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:26px 0 0;padding:0}
 .sp-points li{padding:9px 16px;border-radius:999px;background:#E3F7F5;color:var(--teal,#00756D);font-weight:600;font-size:14px;letter-spacing:.04em}
 .faqs{margin-top:28px;display:grid;gap:12px}
@@ -618,7 +626,16 @@ nav{gap:18px}
 <figure><img decoding="async" loading="lazy" src="img/space-room-1600.webp" srcset="img/space-room-800.webp 800w, img/space-room-1600.webp 1600w" sizes="(max-width:760px) 100vw, 560px" width="1600" height="900" alt="The treatment room with soft lighting, the Dru Thai Yoga sign and the massage mat"><figcaption>Soft light, natural wood and calm, unhurried quiet</figcaption></figure>
 <figure><img decoding="async" loading="lazy" src="img/space-mat-1448.webp" srcset="img/space-mat-800.webp 800w, img/space-mat-1448.webp 1448w" sizes="(max-width:760px) 100vw, 560px" width="1448" height="1086" alt="The large cushioned Thai massage floor mat with a bolster and Buddha statue"><figcaption>A deep, cushioned floor mat for traditional Thai massage</figcaption></figure>
 </div>
+<div class="sp-tour">
+<div class="sp-phone"><video id="tourVid" muted loop playsinline preload="none" poster="img/room-tour-poster.webp" aria-label="A short walk-through video of the treatment room"><source src="video/room-tour.mp4" type="video/mp4"></video></div>
+<div class="sp-ttext">
+<div class="eyebrow" style="justify-content:flex-start">Take a look inside</div>
+<h3>Step inside before you visit</h3>
+<p>A peaceful, wood-lined studio with a deep traditional mat, soft furnishings and a view over the garden. Everything is ready for you to arrive, slow down and let go.</p>
 <ul class="sp-points"><li>Private &amp; peaceful</li><li>Cosy &amp; warm</li><li>Fully clothed, on a traditional floor mat</li></ul>
+<a class="pill navy" href="#book">Book your session <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+</div>
 </div>
 </section>
 
@@ -810,7 +827,7 @@ document.getElementById('fnote').textContent='Your email app should open with th
  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  var hdr=document.querySelector('header');
  // reveal on scroll
- var groups=[['.section .center',0],['.fcard',0],['.offer',.12],['.rev',.1],['.gallery a',.07],['.step',.1],['.hl',.06],['.atext>*',.08],['.binfo>*',.08],['.quoteband .wrap>*',.12],['.also span',.05],['.mcard',.12],['.mtext>*',.08],['.sp-hero',0],['.sp-grid figure',.12],['.sp-points',0]];
+ var groups=[['.section .center',0],['.fcard',0],['.offer',.12],['.rev',.1],['.gallery a',.07],['.step',.1],['.hl',.06],['.atext>*',.08],['.binfo>*',.08],['.quoteband .wrap>*',.12],['.also span',.05],['.mcard',.12],['.mtext>*',.08],['.sp-hero',0],['.sp-grid figure',.12],['.sp-phone',0],['.sp-ttext>*',.08]];
  var els=[];
  groups.forEach(function(g){document.querySelectorAll(g[0]).forEach(function(el,i){el.classList.add('reveal');el.style.setProperty('--d',(Math.min(i,6)*g[1])+'s');els.push(el)})});
  document.querySelectorAll('.aphoto,.profile,#enq,.mvis').forEach(function(el){el.classList.add('reveal','zoom');els.push(el)});
@@ -1081,6 +1098,14 @@ var CAL_LINK = "";
  Cal("init","dru",{origin:"https://app.cal.com"});
  Cal.ns.dru("inline",{elementOrSelector:"#cal-inline",calLink:CAL_LINK,config:{layout:"month_view",theme:"light","ui.autoscroll":"false"}});
  Cal.ns.dru("ui",{theme:"light",cssVarsPerTheme:{light:{"cal-brand":"#0F2E4E","cal-brand-emphasis":"#00756D","cal-brand-text":"#FFFFFF"}},hideEventTypeDetails:false,layout:"month_view"});
+})();
+</script>
+
+<script>
+(function(){var v=document.getElementById('tourVid');if(!v)return;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.controls=true;v.preload='metadata';return}
+ if(!('IntersectionObserver' in window)){v.preload='auto';v.play().catch(function(){});return}
+ new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(v.preload==='none'){v.preload='auto';v.load()}var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}})},{rootMargin:'200px 0px',threshold:.15}).observe(v);
 })();
 </script>
 </body>
